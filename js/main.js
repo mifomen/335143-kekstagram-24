@@ -1,14 +1,14 @@
 function getRandom(min,max) {
-  if (max<min) {
-    return 'false';
+  if ( max < min || max < 0 || min < 0 ) {
+    return false;
   }
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
+
 getRandom(0,1);
 
 function checkedMaxLength (string,max) {
-  if (string.length<=max) { return true; }
-  return false;
+  return string.length <= max;
 }
 
 const testString = 'Ivanov Ivan Ivanich';
