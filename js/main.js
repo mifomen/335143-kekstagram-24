@@ -60,6 +60,7 @@ const getRandomPosts = function (countOfPhotos) {
   return Array.from({length: countOfPhotos}, createPostPhoto);
 };
 
+// eslint-disable-next-line
 const similarPhotos = getRandomPosts(SIMILAR_PHOTOS_COUNT);
 // const similarPhotos = Array.from({length: SIMILAR_PHOTOS_COUNT}, createPostPhoto);
 
