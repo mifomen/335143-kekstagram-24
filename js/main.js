@@ -64,7 +64,3 @@ const getRandomPosts = function (countOfPhotos) {
 const similarPhotos = getRandomPosts(SIMILAR_PHOTOS_COUNT);
 // const similarPhotos = Array.from({length: SIMILAR_PHOTOS_COUNT}, createPostPhoto);
 
-// const { uuid } = require('../node_modules/uuidv4/build/lib/uuidv4.js');
-
-// import { uuid } from '../node_modules/uuidv4/build/lib/uuidv4.js';
-// console.log(uuid());
