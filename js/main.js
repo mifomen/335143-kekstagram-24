@@ -25,23 +25,23 @@ const descriptions = [
 
 const SIMILAR_PHOTOS_COUNT = 25;
 
-const getRandomArrayElement = (elements) => {
+const getRandomArrayElement = function(elements) {
   return elements[getRandom(0, elements.length - 1)];
 };
 
-const getAvatarImage = () => {
+const getAvatarImage = function() {
   return 'img/avatar-' + [getRandom(1, 6)] + '.svg';
 };
 
 let indexId = 0;
-const createPostPhoto= () => {
+const createPostPhoto = function() {
   return {
     id: indexId++,
     url: getAvatarImage(),
     description: getRandomArrayElement(descriptions),
     likes: getRandom(15,200),
     comments: getRandomArrayElement(comments),
-    name: getRandomArrayElement(randomNames)
+    name: getRandomArrayElement(randomNames),
   };
 };
 
