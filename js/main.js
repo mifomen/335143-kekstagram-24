@@ -4,7 +4,7 @@ const DESCRIPTIONS = ['На кладбище идет, что ли?','Краси
 
 const SIMILAR_PHOTOS_COUNT = 25;
 
-const getRandomMessages = (elements) => {
+function getRandomMessages (elements) {
   if (getRandom(0,1)===1) {
     return `${getRandomArrayElement(elements)} ${getRandomArrayElement(elements)}`;
   }
