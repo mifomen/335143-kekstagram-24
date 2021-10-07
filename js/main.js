@@ -4,19 +4,23 @@ const DESCRIPTIONS = ['На кладбище идет, что ли?','Краси
 
 const SIMILAR_PHOTOS_COUNT = 25;
 
-function getRandomMessages (elements) {
+const getRandom = (min,max) => {
+  if ( max < min || max < 0 || min < 0 ) {
+    return false;
+  }
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+};
+
+function getRandomArrayElement(elements) {
+  return elements[getRandom(0, elements.length - 1)];
+}
+
+const getRandomMessages = (elements) => {
   if (getRandom(0,1)===1) {
     return `${getRandomArrayElement(elements)} ${getRandomArrayElement(elements)}`;
   }
   return getRandomArrayElement(elements);
 };
-
-function getRandom(min,max) {
-  if ( max < min || max < 0 || min < 0 ) {
-    return false;
-  }
-  return Math.floor(Math.random() * (max - min + 1)) + min;
-}
 
 function checkedMaxLength (string,max) {
   return string.length <= max;
@@ -25,18 +29,14 @@ function checkedMaxLength (string,max) {
 const testString = 'Ivanov Ivan Ivanich';
 checkedMaxLength(testString, 19);
 
-function getRandomArrayElement(elements) {
-  return elements[getRandom(0, elements.length - 1)];
-}
-
-function getAvatarImage() {
+const getAvatarImage = () => {
   const firstUrlPart = 'img/avatar-';
   const secondUrlPart = '.svg';
   const imageId = [getRandom(1, 6)];
-  return ''.concat(firstUrlPart,imageId,secondUrlPart);
-}
+  return `${firstUrlPart} ${imageId} ${secondUrlPart}`;
+};
 
-function getRandomComments () {
+function getRandomComments() {
   return {
     id: getRandom(1,800),
     avatar: getAvatarImage(),
@@ -59,9 +59,9 @@ function createPostPhoto() {
 }
 
 
-function getRandomPosts(countOfPhotos) {
+const getRandomPosts = function(countOfPhotos) {
   return Array.from({length: countOfPhotos}, createPostPhoto);
-}
+};
 
 // eslint-disable-next-line
 const similarPhotos = getRandomPosts(SIMILAR_PHOTOS_COUNT);
