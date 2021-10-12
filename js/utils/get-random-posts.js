@@ -1,3 +1,3 @@
-exprot const getRandomPosts = function(countOfPhotos) {
+export const getRandomPosts = function(countOfPhotos) {
   return Array.from({length: countOfPhotos}, createPostPhoto);
 };
