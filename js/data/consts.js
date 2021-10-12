@@ -6,4 +6,4 @@ export const SIMILAR_PHOTOS_COUNT = 25;
 export const MIN_LIKES = 15;
 export const MAX_LIKES = 200;
 export const TEST_STRING = 'Ivanov Ivan Ivanich';
-export const postId = 0;
+export let postId = 0;
