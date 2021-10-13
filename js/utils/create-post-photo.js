@@ -5,11 +5,11 @@ import {getAvatarImage} from './get-avatar-image.js';
 import {getRandomArrayElement} from './get-random-array-element.js';
 import {getRandomPositiveInteger} from './get-random-positive-integer.js';
 import {getRandomComments} from './get-random-comments.js';
-import {getId} from './get-id.js';
+// import {getId} from './get-id.js';
 
 export function createPostPhoto(countOfPhotos) {
   return {
-    id: getId(countOfPhotos),
+    id: countOfPhotos,
     url: getAvatarImage(),
     description: getRandomArrayElement(DESCRIPTIONS),
     likes: getRandomPositiveInteger(MIN_LIKES,MAX_LIKES),
