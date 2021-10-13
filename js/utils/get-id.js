@@ -10,8 +10,9 @@
 //   });
 // }
 
-function getId (newArrayLength) {
-  return new Array(newArrayLength).fill(null).length;
+function getId (countOfPosts) {
+  return  countOfPosts;
+  // return new Array(countOfPosts).fill(null).length;
   // map(function(item,index) {
 
   //   return index.length;

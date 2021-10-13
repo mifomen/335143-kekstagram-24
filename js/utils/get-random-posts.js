@@ -1,9 +1,7 @@
 import {createPostPhoto} from './create-post-photo.js';
 
 const getRandomPosts = function (countOfPhotos) {
-  return new Array(countOfPhotos).fill(null).map(function(item,index) {
-    return createPostPhoto(index);
-  });
+  return new Array(countOfPhotos).fill(null).map((item,index)=>createPostPhoto(index));
 };
 
 // const getRandomPosts = (countOfPhotos) => {
