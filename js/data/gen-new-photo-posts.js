@@ -4,4 +4,3 @@ import {SIMILAR_PHOTOS_COUNT} from './consts.js';
 const similarPhotos = getRandomPosts(SIMILAR_PHOTOS_COUNT);
 
 export {similarPhotos};
-
