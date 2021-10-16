@@ -28,3 +28,18 @@ console.log(photoPost.url);
   // testPic.docu photoPost.url =
   console.log(testPic)
 })
+
+// task 7.2 module7-task2
+// let BigPicture = document.querySelector('.big-picture')
+
+// BigPicture.classList.remove('hidden')
+
+// // import {getRandomArrayElement} from './utils/get-random-array-element.js'
+// import {getRandomPositiveInteger} from './utils/get-random-positive-integer.js';
+
+
+// document.querySelector('.big-picture__img').src=similarPhotos[getRandomPositiveInteger(0,similarPhotos.length)].url;
+// // document.querySelector('.big-picture__img').src="mifomen.jps"
+// document.querySelector('.likes-count').textContent=similarPhotos[getRandomPositiveInteger(0,similarPhotos.length)].likes;
+// console.log(similarPhotos[getRandomPositiveInteger(0,similarPhotos.length)].likes)
+// document.querySelector('.comments-count').textContent=similarPhotos[getRandomPositiveInteger(0,similarPhotos.length)].comments;
