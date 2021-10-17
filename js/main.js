@@ -8,19 +8,19 @@ console.log(similarPhotos)
 
 
 // task module7-task2
-let BigPicture = document.querySelector('.big-picture')
+const bigPicture = document.querySelector('.big-picture');
 
-BigPicture.classList.remove('hidden')
+bigPicture.classList.remove('hidden');
 
 import {getRandomPositiveInteger} from './utils/get-random-positive-integer.js';
 import {getRandomComments} from './utils/get-random-comments.js';
 
-let randomComments = new Array(getRandomPositiveInteger(1,25)).fill(null).map((item,index)=>getRandomComments(index));
+const randomComments = new Array(getRandomPositiveInteger(1,25)).fill(null).map((item,index)=>getRandomComments(index));
 
 const renderRandomComments = function ()  {
-  let commentsList = document.querySelector('.social__comments');
-  let commentElement = document.querySelector('.social__comment');
-  let commentFragment = document.createDocumentFragment();
+  const commentsList = document.querySelector('.social__comments');
+  const commentElement = document.querySelector('.social__comment');
+  const commentFragment = document.createDocumentFragment();
   commentsList.innerHTML='';
 
   randomComments.forEach((randomComment) => {
@@ -28,49 +28,64 @@ const renderRandomComments = function ()  {
     copyComment.querySelector('.social__picture').src=randomComment.avatar;
     copyComment.querySelector('.social__picture').alt=randomComment.name;
     copyComment.querySelector('.social__text').textContent=randomComment.message;
-    commentFragment.appendChild(copyComment)
-  })
-  commentsList.appendChild(commentFragment)
-}
+    commentFragment.appendChild(copyComment);
+  });
+  commentsList.appendChild(commentFragment);
+};
 
-let likes = document.querySelector('.likes-count');
-likes.textContent = getRandomPositiveInteger(15,125)
+const likesCount = document.querySelector('.likes-count');
+likesCount.textContent = getRandomPositiveInteger(15,125);
 
-let comments = document.querySelector('.comments-count');
+const comments = document.querySelector('.comments-count');
 comments.textContent = randomComments.length;
 
 import {getRandomArrayElement} from './utils/get-random-array-element.js';
 import {DESCRIPTIONS} from './data/consts.js';
 
-let l = document.querySelector('.social__caption');
-l.textContent= getRandomArrayElement(DESCRIPTIONS);
+const imgDescription = document.querySelector('.social__caption');
+imgDescription.textContent= getRandomArrayElement(DESCRIPTIONS);
 
-document.querySelector('.social__comment-count').classList.add('hidden')
-document.querySelector('.comments-loader').classList.add('hidden')
+document.querySelector('.social__comment-count').classList.add('hidden');
+document.querySelector('.comments-loader').classList.add('hidden');
 
-const body = document.querySelector('body')
-body.classList.add('modal-open')
+const body = document.querySelector('body');
+body.classList.add('modal-open');
 
 
 renderRandomComments();
 
-console.log(randomComments);
+// console.log(randomComments);
 
-let closePreview = document.querySelector('#picture-cancel');
-closePreview.addEventListener('click', function () {
-  BigPicture.classList.add('hidden')
+const closePreview = document.querySelector('#picture-cancel');
+closePreview.addEventListener('click', () => {
+  bigPicture.classList.add('hidden');
 
   if (body.classList.contains('modal-open')) {
-    body.classList.remove('modal-open')
+    body.classList.remove('modal-open');
   }
-})
+});
 
 
-document.addEventListener('keydown', function(event) {
-  if (event.code === 'Escape' && !BigPicture.classList.contains('hidden')) {
-    BigPicture.classList.add('hidden')
+document.addEventListener('keydown', (event) => {
+  if (event.code === 'Escape' && !bigPicture.classList.contains('hidden')) {
+    bigPicture.classList.add('hidden');
     if (body.classList.contains('modal-open')) {
-      body.classList.remove('modal-open')
+      body.classList.remove('modal-open');
     }
   }
 });
+
+
+const bg = document.querySelector('.big-picture__img');
+const bgimg = bg.querySelector('img');
+
+
+bgimg.src=`../photos/${getRandomPositiveInteger(1,25)}.jpg`;
+// `bgimg.alt='';
+
+if (!randomComments.length === 0) {
+  bgimg.alt=`${randomComments[getRandomPositiveInteger(0,randomComments.length)].name}`;
+}
+
+// console.log(bgimg.alt)
+// console.log(bgimg)
