@@ -33,8 +33,11 @@ const renderRandomComments = function ()  {
   commentsList.appendChild(commentFragment);
 };
 
+
+const MIN_LIKES_COUNT = 15;
+const MAX_LIKES_COUNT = 125;
 const likesCount = document.querySelector('.likes-count');
-likesCount.textContent = getRandomPositiveInteger(15,125);
+likesCount.textContent = getRandomPositiveInteger(MIN_LIKES_COUNT, MAX_LIKES_COUNT);
 
 const comments = document.querySelector('.comments-count');
 comments.textContent = randomComments.length;
