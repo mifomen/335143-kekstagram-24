@@ -62,14 +62,25 @@ closePreview.addEventListener('click', () => {
   hidePicture (bigPicture);
 });
 
-document.addEventListener('keydown', (event) => {
+function escapePress() {
   if (event.code === 'Escape' && !bigPicture.classList.contains('hidden')) {
     hidePicture (bigPicture);
     if (body.classList.contains('modal-open')) {
       body.classList.remove('modal-open');
     }
   }
-});
+}
+
+document.addEventListener('keydown', escapePress);
+
+// document.addEventListener('keydown', (event) => {
+//   if (event.code === 'Escape' && !bigPicture.classList.contains('hidden')) {
+//     hidePicture (bigPicture);
+//     if (body.classList.contains('modal-open')) {
+//       body.classList.remove('modal-open');
+//     }
+//   }
+// });
 
 const postPhotoImage = document.querySelector('.big-picture__img').querySelector('img');
 postPhotoImage.src=`../photos/${getRandomPositiveInteger(1,25)}.jpg`;
