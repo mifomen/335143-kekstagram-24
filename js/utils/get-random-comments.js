@@ -4,7 +4,7 @@ import {getAvatarImage} from './get-avatar-image.js';
 import {getRandomMessages} from './get-random-messages.js';
 import {getRandomArrayElement} from './get-random-array-element.js';
 
-export function getRandomComments() {
+export function getRandomComments(countOfPosts) {
   return {
     id: getRandomPositiveInteger(1,800),
     avatar: getAvatarImage(),
