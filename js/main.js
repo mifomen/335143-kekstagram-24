@@ -16,8 +16,6 @@ import {getRandomPositiveInteger} from './utils/get-random-positive-integer.js';
 import {getRandomComments} from './utils/get-random-comments.js';
 
 const randomComments = new Array(getRandomPositiveInteger(1,25)).fill(null).map((item,index)=>getRandomComments(index));
-console.log(randomComments)
-
 
 const renderRandomComments = function ()  {
   const commentsList = document.querySelector('.social__comments');
