@@ -47,20 +47,20 @@ const bigPicture = document.querySelector('.big-picture');
 const openedPost = function(item) {
   item.classList.remove('hidden');
 };
+
 openedPost(bigPicture);
 
-const hidePicture = (item) => {
-  item.classList.add('hidden');
-  item.classList.remove('overlay');
+const hidePicture = () => {
+  document.querySelector('.big-picture').classList.add('hidden');
+  document.querySelector('.big-picture').classList.remove('overlay');
   if (body.classList.contains('modal-open')) {
     body.classList.remove('modal-open');
   }
 };
 
 const closePreview = document.querySelector('#picture-cancel');
-closePreview.addEventListener('click', () => {
-  hidePicture (bigPicture);
-});
+
+closePreview.addEventListener('click', hidePicture);
 
 const onEscapePress = () => {
   if (event.code === 'Escape' && !bigPicture.classList.contains('hidden')) {
@@ -72,15 +72,6 @@ const onEscapePress = () => {
 };
 
 document.addEventListener('keydown', onEscapePress);
-
-// document.addEventListener('keydown', (event) => {
-//   if (event.code === 'Escape' && !bigPicture.classList.contains('hidden')) {
-//     hidePicture (bigPicture);
-//     if (body.classList.contains('modal-open')) {
-//       body.classList.remove('modal-open');
-//     }
-//   }
-// });
 
 const postPhotoImage = document.querySelector('.big-picture__img').querySelector('img');
 postPhotoImage.src=`../photos/${getRandomPositiveInteger(1,25)}.jpg`;
