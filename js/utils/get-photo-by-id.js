@@ -1,6 +1,2 @@
-export const getPhotoById = (countOfPosts) => {
-  return `../photos/${countOfPosts}.jpg`
-};
+export const getPhotoById = (countOfPosts) => `../photos/${countOfPosts}.jpg`;
 
-
-// console.log(getRandomPhoto(1))
