@@ -62,14 +62,14 @@ closePreview.addEventListener('click', () => {
   hidePicture (bigPicture);
 });
 
-function escapePress() {
+const escapePress = () => {
   if (event.code === 'Escape' && !bigPicture.classList.contains('hidden')) {
     hidePicture (bigPicture);
     if (body.classList.contains('modal-open')) {
       body.classList.remove('modal-open');
     }
   }
-}
+};
 
 document.addEventListener('keydown', escapePress);
 
