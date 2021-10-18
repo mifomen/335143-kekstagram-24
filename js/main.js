@@ -59,9 +59,16 @@ renderRandomComments();
 
 // console.log(randomComments);
 
+const hideBigPicture = (item) => {
+  item.classList.add('hidden');
+  item.classList.remove('overlay');
+};
+
 const closePreview = document.querySelector('#picture-cancel');
 closePreview.addEventListener('click', () => {
-  bigPicture.classList.add('hidden');
+  // bigPicture.classList.add('hidden');
+  // bigPicture.classList.remove('overlay');
+  hideBigPicture (bigPicture);
 
   if (body.classList.contains('modal-open')) {
     body.classList.remove('modal-open');
@@ -70,8 +77,9 @@ closePreview.addEventListener('click', () => {
 
 
 document.addEventListener('keydown', (event) => {
+  // console.log('key down')
   if (event.code === 'Escape' && !bigPicture.classList.contains('hidden')) {
-    bigPicture.classList.add('hidden');
+    hideBigPicture (bigPicture);
     if (body.classList.contains('modal-open')) {
       body.classList.remove('modal-open');
     }
