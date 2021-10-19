@@ -49,7 +49,7 @@ const openPost = function(item) {
 };
 openPost(bigPicture);
 
-const onEscapePress = (event) => {
+const onEscapePress = () => {
   if (event.code === 'Escape' && !bigPicture.classList.contains('hidden')) {
     hidePicture (bigPicture);
   }
