@@ -51,11 +51,11 @@ openPost(bigPicture);
 
 const onEscapePress = () => {
   if (event.code === 'Escape' && !bigPicture.classList.contains('hidden')) {
-    hidePicture (bigPicture);
+    onCloseClick (bigPicture);
   }
 };
 
-function hidePicture() {
+function onCloseClick() {
   document.querySelector('.big-picture').classList.add('hidden');
   document.querySelector('.big-picture').classList.remove('overlay');
   if (body.classList.contains('modal-open')) {
@@ -66,8 +66,8 @@ function hidePicture() {
 }
 
 
-const onCloseClick = document.querySelector('#picture-cancel');
-onCloseClick.addEventListener('click', hidePicture);
+const closePictureButton = document.querySelector('#picture-cancel');
+closePictureButton.addEventListener('click', onCloseClick);
 
 document.addEventListener('keydown', onEscapePress);
 
