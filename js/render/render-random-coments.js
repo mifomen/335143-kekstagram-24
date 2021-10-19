@@ -66,7 +66,7 @@ function hidePicture() {
 }
 const onCloseClick = () => {
   hidePicture ();
-}
+};
 
 const closePictureButton = document.querySelector('#picture-cancel');
 closePictureButton.addEventListener('click', onCloseClick);
