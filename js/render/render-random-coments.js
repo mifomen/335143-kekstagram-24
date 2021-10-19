@@ -1,5 +1,5 @@
 import {getRandomArrayElement} from '../utils/get-random-array-element.js';
-import {DESCRIPTIONS,MIN_LIKES,MAX_LIKES} from '../data/consts.js';
+import {DESCRIPTIONS,MIN_LIKES,MAX_LIKES,POSTS_COUNT} from '../data/consts.js';
 import {getRandomPositiveInteger} from '../utils/get-random-positive-integer.js';
 import {getRandomComments} from '../utils/get-random-comments.js';
 
@@ -44,37 +44,35 @@ body.classList.add('modal-open');
 
 const bigPicture = document.querySelector('.big-picture');
 
-const openedPost = function(item) {
+const openPost = function(item) {
   item.classList.remove('hidden');
 };
+openPost(bigPicture);
 
-openedPost(bigPicture);
+const onEscapePress = (event) => {
+  if (event.code === 'Escape' && !bigPicture.classList.contains('hidden')) {
+    hidePicture (bigPicture);
+  }
+};
 
-const hidePicture = () => {
+function hidePicture() {
   document.querySelector('.big-picture').classList.add('hidden');
   document.querySelector('.big-picture').classList.remove('overlay');
   if (body.classList.contains('modal-open')) {
     body.classList.remove('modal-open');
   }
-};
 
-const closePreview = document.querySelector('#picture-cancel');
+  document.removeEventListener('keydown', onEscapePress);
+}
 
-closePreview.addEventListener('click', hidePicture);
 
-const onEscapePress = () => {
-  if (event.code === 'Escape' && !bigPicture.classList.contains('hidden')) {
-    hidePicture (bigPicture);
-    if (body.classList.contains('modal-open')) {
-      body.classList.remove('modal-open');
-    }
-  }
-};
+const onCloseClick = document.querySelector('#picture-cancel');
+onCloseClick.addEventListener('click', hidePicture);
 
 document.addEventListener('keydown', onEscapePress);
 
 const postPhotoImage = document.querySelector('.big-picture__img').querySelector('img');
-postPhotoImage.src=`../photos/${getRandomPositiveInteger(1,25)}.jpg`;
+postPhotoImage.src=`../photos/${getRandomPositiveInteger(1,POSTS_COUNT)}.jpg`;
 if (!randomComments.length === 0) {
   postPhotoImage.alt=`${randomComments[getRandomPositiveInteger(0,randomComments.length)].name}`;
 }
