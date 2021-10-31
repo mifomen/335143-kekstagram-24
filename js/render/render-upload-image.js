@@ -101,7 +101,7 @@ inputHashtag.addEventListener('input', () => {
     inputHashtag.setCustomValidity('Пробелы в конце нельзя');
   } else if (checkHashtagCounts(inputHashtag) == false) {
     inputHashtag.setCustomValidity('У вас много хэштегов, максимум 5');
-  } else if (checkHashtagEvery(inputHashtag) != true) {
+  } else if (checkHashtagEvery(inputHashtag) == false) {
     inputHashtag.setCustomValidity('У вас неправильно набран хэштег');
   } else {
     inputHashtag.setCustomValidity('');
