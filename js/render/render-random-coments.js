@@ -39,8 +39,8 @@ const commentsLoader = document.querySelector('.comments-loader');
 commentsLoader.classList.add('hidden');
 
 
-const body = document.querySelector('body');
-body.classList.add('modal-open');
+export const BODY = document.querySelector('body');
+BODY.classList.add('modal-open');
 
 const bigPicture = document.querySelector('.big-picture');
 
@@ -58,8 +58,8 @@ const onEscapePress = () => {
 function hidePicture() {
   document.querySelector('.big-picture').classList.add('hidden');
   document.querySelector('.big-picture').classList.remove('overlay');
-  if (body.classList.contains('modal-open')) {
-    body.classList.remove('modal-open');
+  if (BODY.classList.contains('modal-open')) {
+    BODY.classList.remove('modal-open');
   }
 
   document.removeEventListener('keydown', onEscapePress);
