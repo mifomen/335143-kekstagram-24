@@ -13,17 +13,17 @@ resizeInput.value = '100%';
 // const scaledImage = () => {}
 
 btnResizeMinus.addEventListener('click', () => {
-  if (parseInt(resizeInput.value,2) <= MIN_SIZE + STEP) {resizeInput.value = '0%';} else {
-    resizeInput.value = `${parseInt(resizeInput.value,2) - STEP}%`;
+  if (parseInt(resizeInput.value) <= MIN_SIZE + STEP) {resizeInput.value = '0%';} else {
+    resizeInput.value = `${parseInt(resizeInput.value) - STEP}%`;
   }
-  preview.style.transform = `scale(0${parseInt(resizeInput.value,2) / 100 })`;
+  preview.style.transform = `scale(0${parseInt(resizeInput.value) / 100 })`;
 });
 
 btnResizePlus.addEventListener('click', () => {
-  if (parseInt(resizeInput.value,2) >= MAX_SIZE - STEP ) {resizeInput.value = '100%';} else {
-    resizeInput.value = `${parseInt(resizeInput.value,2) + STEP}%`;
+  if (parseInt(resizeInput.value) >= MAX_SIZE - STEP ) {resizeInput.value = '100%';} else {
+    resizeInput.value = `${parseInt(resizeInput.value) + STEP}%`;
   }
-  preview.style.transform = `scale(0${parseInt(resizeInput.value,2) / 100 })`;
+  preview.style.transform = `scale(0${parseInt(resizeInput.value) / 100 })`;
 });
 
-document.querySelector('.big-picture').classList.add('hidden');
+// document.querySelector('.big-picture').classList.add('hidden');

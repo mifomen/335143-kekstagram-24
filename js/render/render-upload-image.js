@@ -7,17 +7,18 @@ const MAX_DESCRIPTION_LENGTH = 140;
 const uploadForm = document.querySelector('#upload-select-image');
 const uploadCancelBtn = document.querySelector('#upload-cancel');
 const uploadImageOverlay = document.querySelector('.img-upload__overlay');
-const checkHashTag = /^#[A-Za-zА-Яа-яЁё0-9]{1,19}$/;
-const hashInput = document.querySelector('.text__hashtags');
+const templateHashtag = /^#[A-Za-zА-Яа-яЁё0-9]{1,19}$/;
+const inputHashtag = document.querySelector('.text__hashtags');
 const inputDescription = document.querySelector('.text__description');
 const photoPreview = document.querySelector('.img-upload__preview img');
+const uploadBtnSubmit = document.querySelector('.img-upload__submit');
 
 const uploadFile = document.querySelector('#upload-file');
 const effectList = document.querySelectorAll('.effects__preview');
 
 
 const onEscapePress = () => {
-  if (event.code === 'Escape' && !uploadImageOverlay.classList.contains('hidden') && hashInput !==document.activeElement && inputDescription !== document.activeElement) {
+  if (event.code === 'Escape' && !uploadImageOverlay.classList.contains('hidden') && inputHashtag !==document.activeElement && inputDescription !== document.activeElement) {
     uploadImageOverlay.classList.add('hidden');
 
     uploadForm.reset();
@@ -34,6 +35,7 @@ function hideUploadOverlay() {
   document.removeEventListener('keydown', onEscapePress);
   uploadForm.reset();
 }
+
 const onLoadImage = () => {
   uploadImageOverlay.classList.remove('hidden');
   BODY.classList.add('modal-open');
@@ -54,30 +56,58 @@ const onLoadImage = () => {
 
 uploadForm.addEventListener('change', onLoadImage);
 
+const testStringOnHashtag = (item) => {
+  if (templateHashtag.test(item)) {
+    return true;
+  }
+}
+const checkHashtagCounts = (item) => {
+  if ( item.value.length > 0 ) {
+  let arr = item.value.split(' ');
+    if (arr.length <= 5) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+}
 
-hashInput.addEventListener('input', () => {
-  const valueLength = hashInput.value.length;
+const checkHashtagEvery = (item) => {
+  if ( item.value.length > 0 ) {
+  let arr = item.value.split(' ');
+    if (arr.every(testStringOnHashtag)) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+}
 
-  // console.log(hashInput.value[hashInput.value.length-1])
+// inputHashtag.value = '#121a3 #12333 #mifomf #mifme';
 
-  if (hashInput.value[0] !== '#') {
-    hashInput.setCustomValidity('ХэшТег должен начинаться с #');
-  } else if (checkHashTag.test(hashInput.value) && valueLength < MIN_HASHTAG_LENGTH) {
-    hashInput.setCustomValidity(`Еще ${ MIN_HASHTAG_LENGTH - valueLength} символа`);
-  } else if (checkHashTag.test(hashInput.value) && valueLength > MAX_HASHTAG_LENGTH) {
-    hashInput.setCustomValidity(`Набрали на ${ valueLength - MAX_HASHTAG_LENGTH } лишних символов`);
+inputHashtag.addEventListener('input', () => {
+  const valueLength = inputHashtag.value.length;
+
+  // testHashtag(inputHashtag);
+  // console.log(testHashtag(inputHashtag))
+
+  if (inputHashtag.value[0] !== '#') {
+    inputHashtag.setCustomValidity('ХэшТег должен начинаться с #');
+  } else if (templateHashtag.test(inputHashtag.value) && valueLength < MIN_HASHTAG_LENGTH) {
+    inputHashtag.setCustomValidity(`Еще ${ MIN_HASHTAG_LENGTH - valueLength} символа`);
+  } else if (templateHashtag.test(inputHashtag.value) && valueLength > MAX_HASHTAG_LENGTH) {
+    inputHashtag.setCustomValidity(`Набрали на ${ valueLength - MAX_HASHTAG_LENGTH } лишних символов`);
+  } else if (inputHashtag.value[inputHashtag.value.length-1] === ' ') {
+    inputHashtag.setCustomValidity('Пробелы в конце нельзя');
+  } else if (checkHashtagCounts(inputHashtag) == false) {
+    inputHashtag.setCustomValidity('У вас много хэштегов, максимум 5');
+  } else if (checkHashtagEvery(inputHashtag) != true) {
+    inputHashtag.setCustomValidity('У вас неправильно набран хэштег');
   } else {
-    hashInput.setCustomValidity('');
+    inputHashtag.setCustomValidity('');
   }
 
-  // if (checkHashTag.test(hashInput.value)) {
-  //   console.log(checkHashTag.test(hashInput.value))
-  //   hashInput.setCustomValidity(`Это не ХэшТег`);
-  // } else {
-  //   hashInput.setCustomValidity('');
-  // }
-
-  hashInput.reportValidity();
+  inputHashtag.reportValidity();
 });
 
 inputDescription.addEventListener('input', () => {
@@ -91,10 +121,8 @@ inputDescription.addEventListener('input', () => {
 });
 
 
-// photoPreview
-const reader = new FileReader();
+uploadBtnSubmit.addEventListener('click', () => {
+})
 
-reader.addEventListener('load', () => {
-  photoPreview.src = reader.result;
 
-});
+
