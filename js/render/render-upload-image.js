@@ -1,4 +1,6 @@
 import {BODY} from './render-random-coments.js';
+import {checkStringLength} from '../utils/check-string-length.js';
+import {resizeInput,preview} from '../utils/scale-post.js';
 
 const MIN_HASHTAG_LENGTH = 2;
 const MAX_HASHTAG_LENGTH = 25;
@@ -11,7 +13,7 @@ const templateHashtag = /^#[A-Za-zА-Яа-яЁё0-9]{1,19}$/;
 const inputHashtag = document.querySelector('.text__hashtags');
 const inputDescription = document.querySelector('.text__description');
 const photoPreview = document.querySelector('.img-upload__preview img');
-const uploadBtnSubmit = document.querySelector('.img-upload__submit');
+// const uploadBtnSubmit = document.querySelector('.img-upload__submit');
 
 const uploadFile = document.querySelector('#upload-file');
 const effectList = document.querySelectorAll('.effects__preview');
@@ -60,28 +62,29 @@ const testStringOnHashtag = (item) => {
   if (templateHashtag.test(item)) {
     return true;
   }
-}
+};
+
 const checkHashtagCounts = (item) => {
   if ( item.value.length > 0 ) {
-  let arr = item.value.split(' ');
+    const arr = item.value.split(' ');
     if (arr.length <= 5) {
       return true;
     } else {
       return false;
     }
   }
-}
+};
 
 const checkHashtagEvery = (item) => {
   if ( item.value.length > 0 ) {
-  let arr = item.value.split(' ');
+    const arr = item.value.split(' ');
     if (arr.every(testStringOnHashtag)) {
       return true;
     } else {
       return false;
     }
   }
-}
+};
 
 // inputHashtag.value = '#121a3 #12333 #mifomf #mifme';
 
@@ -99,9 +102,9 @@ inputHashtag.addEventListener('input', () => {
     inputHashtag.setCustomValidity(`Набрали на ${ valueLength - MAX_HASHTAG_LENGTH } лишних символов`);
   } else if (inputHashtag.value[inputHashtag.value.length-1] === ' ') {
     inputHashtag.setCustomValidity('Пробелы в конце нельзя');
-  } else if (checkHashtagCounts(inputHashtag) == false) {
+  } else if (checkHashtagCounts(inputHashtag) === false) {
     inputHashtag.setCustomValidity('У вас много хэштегов, максимум 5');
-  } else if (checkHashtagEvery(inputHashtag) == false) {
+  } else if (checkHashtagEvery(inputHashtag) === false) {
     inputHashtag.setCustomValidity('У вас неправильно набран хэштег');
   } else {
     inputHashtag.setCustomValidity('');
@@ -112,7 +115,7 @@ inputHashtag.addEventListener('input', () => {
 
 inputDescription.addEventListener('input', () => {
   const valueLength = inputDescription.value.length;
-  if (valueLength > MAX_DESCRIPTION_LENGTH ) {
+  if (!checkStringLength(inputDescription.value,MAX_DESCRIPTION_LENGTH)) {
     inputDescription.setCustomValidity(`Набрали на ${ valueLength - MAX_DESCRIPTION_LENGTH } лишних символов`);
   } else {
     inputDescription.setCustomValidity('');
@@ -121,8 +124,8 @@ inputDescription.addEventListener('input', () => {
 });
 
 
-uploadBtnSubmit.addEventListener('click', () => {
-})
-
-
+uploadFile.addEventListener('click', () => {
+  resizeInput.value = '100%';
+  preview.style.transform = 'scale(1)';
+});
 

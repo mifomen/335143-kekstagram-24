@@ -27,3 +27,6 @@ btnResizePlus.addEventListener('click', () => {
 });
 
 // document.querySelector('.big-picture').classList.add('hidden');
+
+
+export {resizeInput,preview};
