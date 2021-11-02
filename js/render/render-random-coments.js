@@ -26,18 +26,19 @@ renderRandomComments();
 const likesCount = document.querySelector('.likes-count');
 likesCount.textContent = getRandomPositiveInteger(MIN_LIKES,MAX_LIKES);
 
+const commentCount = document.querySelector('.social__comment-count');
+if (5 >= randomComments.length) {
+  commentCount.textContent=`${randomComments.length} из ${randomComments.length}`;
+}
+
 const comments = document.querySelector('.comments-count');
 comments.textContent = randomComments.length;
 
 const imgDescription = document.querySelector('.social__caption');
 imgDescription.textContent= getRandomArrayElement(DESCRIPTIONS);
 
-const commentCount = document.querySelector('.social__comment-count');
-commentCount.classList.add('hidden');
-
 const commentsLoader = document.querySelector('.comments-loader');
 commentsLoader.classList.add('hidden');
-
 
 export const BODY = document.querySelector('body');
 BODY.classList.add('modal-open');
