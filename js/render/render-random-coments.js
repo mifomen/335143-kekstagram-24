@@ -40,8 +40,8 @@ imgDescription.textContent= getRandomArrayElement(DESCRIPTIONS);
 const commentsLoader = document.querySelector('.comments-loader');
 commentsLoader.classList.add('hidden');
 
-export const BODY = document.querySelector('body');
-BODY.classList.add('modal-open');
+export const body = document.body;
+body.classList.add('modal-open');
 
 const bigPicture = document.querySelector('.big-picture');
 
@@ -59,8 +59,8 @@ const onEscapePress = () => {
 function hidePicture() {
   document.querySelector('.big-picture').classList.add('hidden');
   document.querySelector('.big-picture').classList.remove('overlay');
-  if (BODY.classList.contains('modal-open')) {
-    BODY.classList.remove('modal-open');
+  if (body.classList.contains('modal-open')) {
+    body.classList.remove('modal-open');
   }
 
   document.removeEventListener('keydown', onEscapePress);

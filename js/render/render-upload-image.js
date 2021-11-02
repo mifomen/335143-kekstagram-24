@@ -1,11 +1,11 @@
-import {BODY} from './render-random-coments.js';
-import {checkStringLength} from '../utils/check-string-length.js';
 import {resizeInput,preview} from '../utils/scale-post.js';
 
 const MIN_HASHTAG_LENGTH = 2;
 const MAX_HASHTAG_LENGTH = 25;
-const MAX_DESCRIPTION_LENGTH = 140;
+const MIN_HASHTAG_COUNT = 5;
+const MAX_HASHTAG_COUNT = 5;
 
+const body = document.body;
 const uploadForm = document.querySelector('#upload-select-image');
 const uploadCancelBtn = document.querySelector('#upload-cancel');
 const uploadImageOverlay = document.querySelector('.img-upload__overlay');
@@ -23,9 +23,11 @@ const onEscapePress = () => {
   if (event.code === 'Escape' && !uploadImageOverlay.classList.contains('hidden') && inputHashtag !==document.activeElement && inputDescription !== document.activeElement) {
     uploadImageOverlay.classList.add('hidden');
 
+    this.removeEventListener('hideUploadOverlay');
+
     uploadForm.reset();
-    if (BODY.classList.contains('modal-open')) {
-      BODY.classList.remove('modal-open');
+    if (body.classList.contains('modal-open')) {
+      body.classList.remove('modal-open');
     }
   }
 };
@@ -40,18 +42,18 @@ function hideUploadOverlay() {
 
 const onLoadImage = () => {
   uploadImageOverlay.classList.remove('hidden');
-  BODY.classList.add('modal-open');
+  body.classList.add('modal-open');
   const file = uploadFile.files[0];
-  const READER = new FileReader();
-  READER.addEventListener('load', () => {
-    photoPreview.src = READER.result;
+  const reader = new FileReader();
+  reader.addEventListener('load', () => {
+    photoPreview.src = reader.result;
 
     [].forEach.call(effectList, (effectPreview) => {
-      effectPreview.style.backgroundImage = `url('${READER.result}')`;
+      effectPreview.style.backgroundImage = `url('${reader.result}')`;
     });
   });
 
-  READER.readAsDataURL(file);
+  reader.readAsDataURL(file);
   uploadCancelBtn.addEventListener('click',hideUploadOverlay);
   document.addEventListener('keydown', onEscapePress);
 };
@@ -65,9 +67,9 @@ const testStringOnHashtag = (item) => {
 };
 
 const checkHashtagCounts = (item) => {
-  if ( item.value.length > 0 ) {
+  if ( item.value.length > MIN_HASHTAG_COUNT ) {
     const arr = item.value.split(' ');
-    if (arr.length <= 5) {
+    if (arr.length <= MAX_HASHTAG_COUNT) {
       return true;
     } else {
       return false;
@@ -76,7 +78,7 @@ const checkHashtagCounts = (item) => {
 };
 
 const checkHashtagEvery = (item) => {
-  if ( item.value.length > 0 ) {
+  if ( item.value.length > MIN_HASHTAG_COUNT ) {
     const arr = item.value.split(' ');
     if (arr.every(testStringOnHashtag)) {
       return true;
@@ -102,9 +104,9 @@ inputHashtag.addEventListener('input', () => {
     inputHashtag.setCustomValidity(`Набрали на ${ valueLength - MAX_HASHTAG_LENGTH } лишних символов`);
   } else if (inputHashtag.value[inputHashtag.value.length-1] === ' ') {
     inputHashtag.setCustomValidity('Пробелы в конце нельзя');
-  } else if (checkHashtagCounts(inputHashtag) === false) {
+  } else if (!checkHashtagCounts(inputHashtag) === true) {
     inputHashtag.setCustomValidity('У вас много хэштегов, максимум 5');
-  } else if (checkHashtagEvery(inputHashtag) === false) {
+  } else if (!checkHashtagEvery(inputHashtag) === true) {
     inputHashtag.setCustomValidity('У вас неправильно набран хэштег');
   } else {
     inputHashtag.setCustomValidity('');
@@ -113,15 +115,15 @@ inputHashtag.addEventListener('input', () => {
   inputHashtag.reportValidity();
 });
 
-inputDescription.addEventListener('input', () => {
-  const valueLength = inputDescription.value.length;
-  if (!checkStringLength(inputDescription.value,MAX_DESCRIPTION_LENGTH)) {
-    inputDescription.setCustomValidity(`Набрали на ${ valueLength - MAX_DESCRIPTION_LENGTH } лишних символов`);
-  } else {
-    inputDescription.setCustomValidity('');
-  }
-  inputDescription.reportValidity();
-});
+// inputDescription.addEventListener('input', () => {
+//   const valueLength = inputDescription.value.length;
+//   if (!checkStringLength(inputDescription.value,MAX_DESCRIPTION_LENGTH)) {
+//     inputDescription.setCustomValidity(`Набрали на ${ valueLength - MAX_DESCRIPTION_LENGTH } лишних символов`);
+//   } else {
+//     inputDescription.setCustomValidity('');
+//   }
+//   inputDescription.reportValidity();
+// });
 
 
 uploadFile.addEventListener('click', () => {
