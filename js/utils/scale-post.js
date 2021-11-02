@@ -7,8 +7,8 @@ const MAX_SIZE = 100;
 const MIN_SIZE = 25;
 const STEP = 25;
 
-
-resizeInput.value = '100%';
+const defaultScale= 100;
+resizeInput.value = `${defaultScale}%`;
 
 // const scaledImage = () => {}
 
@@ -16,14 +16,14 @@ btnResizeMinus.addEventListener('click', () => {
   if (parseInt(resizeInput.value,10) <= MIN_SIZE + STEP) {resizeInput.value = '0%';} else {
     resizeInput.value = `${parseInt(resizeInput.value,10) - STEP}%`;
   }
-  preview.style.transform = `scale(0${parseInt(resizeInput.value,10) / 100 })`;
+  preview.style.transform = `scale(0${parseInt(resizeInput.value,10) / defaultScale })`;
 });
 
 btnResizePlus.addEventListener('click', () => {
-  if (parseInt(resizeInput.value,10) >= MAX_SIZE - STEP ) {resizeInput.value = '100%';} else {
+  if (parseInt(resizeInput.value,10) >= MAX_SIZE - STEP ) {resizeInput.value = `${defaultScale}%`;} else {
     resizeInput.value = `${parseInt(resizeInput.value,10) + STEP}%`;
   }
-  preview.style.transform = `scale(0${parseInt(resizeInput.value,10) / 100 })`;
+  preview.style.transform = `scale(0${parseInt(resizeInput.value,10) / defaultScale })`;
 });
 
 // document.querySelector('.big-picture').classList.add('hidden');
