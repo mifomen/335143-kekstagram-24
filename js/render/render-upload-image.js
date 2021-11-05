@@ -23,12 +23,7 @@ const onEscapePress = () => {
   if (event.code === 'Escape' && !uploadImageOverlay.classList.contains('hidden') && inputHashtag !==document.activeElement && inputDescription !== document.activeElement) {
     uploadImageOverlay.classList.add('hidden');
 
-    this.removeEventListener('hideUploadOverlay');
-
-    uploadForm.reset();
-    if (body.classList.contains('modal-open')) {
-      body.classList.remove('modal-open');
-    }
+    hideUploadOverlay();
   }
 };
 
@@ -38,6 +33,9 @@ function hideUploadOverlay() {
   uploadCancelBtn.removeEventListener('click',hideUploadOverlay);
   document.removeEventListener('keydown', onEscapePress);
   uploadForm.reset();
+  if (body.classList.contains('modal-open')) {
+    body.classList.remove('modal-open');
+  }
 }
 
 const onLoadImage = () => {
