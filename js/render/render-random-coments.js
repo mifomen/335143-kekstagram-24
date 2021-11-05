@@ -3,42 +3,62 @@ import {DESCRIPTIONS,MIN_LIKES,MAX_LIKES,POSTS_COUNT} from '../data/consts.js';
 import {getRandomPositiveInteger} from '../utils/get-random-positive-integer.js';
 import {getRandomComments} from '../utils/get-random-comments.js';
 
-const randomComments = new Array(getRandomPositiveInteger(1,25)).fill(null).map((item,index)=>getRandomComments(index));
+const COMMENTS_LENGTH = getRandomPositiveInteger(1,17);
+const randomComments = new Array(COMMENTS_LENGTH).fill(null).map((item,index)=>getRandomComments(index));
 
-export const renderRandomComments = function ()  {
+const renderRandomComments = function (count)  {
   const commentsList = document.querySelector('.social__comments');
   const commentElement = document.querySelector('.social__comment');
   const commentFragment = document.createDocumentFragment();
   commentsList.innerHTML='';
 
-  randomComments.forEach((randomComment) => {
+  const renderComments = randomComments.slice(0,count+5);
+  renderComments.forEach((renderComment) => {
     const copyComment = commentElement.cloneNode(true);
-    copyComment.querySelector('.social__picture').src=randomComment.avatar;
-    copyComment.querySelector('.social__picture').alt=randomComment.name;
-    copyComment.querySelector('.social__text').textContent=randomComment.message;
+    copyComment.querySelector('.social__picture').src=renderComment.avatar;
+    copyComment.querySelector('.social__picture').alt=renderComment.name;
+    copyComment.querySelector('.social__text').textContent=renderComment.message;
     commentFragment.appendChild(copyComment);
   });
   commentsList.appendChild(commentFragment);
 };
 
-renderRandomComments();
+const firstFiveComments = 0;
+renderRandomComments(firstFiveComments);
 
-const likesCount = document.querySelector('.likes-count');
-likesCount.textContent = getRandomPositiveInteger(MIN_LIKES,MAX_LIKES);
 
 const commentCount = document.querySelector('.social__comment-count');
 if (5 >= randomComments.length) {
   commentCount.textContent=`${randomComments.length} из ${randomComments.length}`;
+} else {
+  commentCount.textContent=`5 из ${randomComments.length}`;
 }
 
-const comments = document.querySelector('.comments-count');
-comments.textContent = randomComments.length;
+
+const commentsLoader = document.querySelector('.comments-loader');
+let countRenderComment = 5;
+
+if (randomComments.length <= 5) {
+  commentsLoader.classList.add('hidden');
+} else {
+  commentsLoader.addEventListener('click',(evt) =>{
+    evt = countRenderComment;
+    countRenderComment = countRenderComment+5;
+    renderRandomComments(evt);
+    if (countRenderComment >=randomComments.length) {
+      commentCount.textContent=`${randomComments.length} из ${randomComments.length}`;
+      commentsLoader.classList.add('hidden');
+    } else {
+      commentCount.textContent=`${countRenderComment} из ${randomComments.length}`;
+    }
+  });
+}
+
+const likesCount = document.querySelector('.likes-count');
+likesCount.textContent = getRandomPositiveInteger(MIN_LIKES,MAX_LIKES);
 
 const imgDescription = document.querySelector('.social__caption');
 imgDescription.textContent= getRandomArrayElement(DESCRIPTIONS);
-
-const commentsLoader = document.querySelector('.comments-loader');
-commentsLoader.classList.add('hidden');
 
 export const body = document.body;
 body.classList.add('modal-open');
