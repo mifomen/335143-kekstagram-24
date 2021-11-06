@@ -26,9 +26,10 @@ const renderRandomComments = function (count)  {
 const firstFiveComments = 0;
 renderRandomComments(firstFiveComments);
 
+let countRenderComment = 5;
 
 const commentCount = document.querySelector('.social__comment-count');
-if (5 >= randomComments.length) {
+if (countRenderComment >= randomComments.length) {
   commentCount.textContent=`${randomComments.length} из ${randomComments.length}`;
 } else {
   commentCount.textContent=`5 из ${randomComments.length}`;
@@ -36,15 +37,13 @@ if (5 >= randomComments.length) {
 
 
 const commentsLoader = document.querySelector('.comments-loader');
-let countRenderComment = 5;
 
-if (randomComments.length <= 5) {
+if (randomComments.length <= countRenderComment) {
   commentsLoader.classList.add('hidden');
 } else {
-  commentsLoader.addEventListener('click',(evt) =>{
-    evt = countRenderComment;
+  commentsLoader.addEventListener('click',() =>{
     countRenderComment = countRenderComment+5;
-    renderRandomComments(evt);
+    renderRandomComments(countRenderComment);
     if (countRenderComment >=randomComments.length) {
       commentCount.textContent=`${randomComments.length} из ${randomComments.length}`;
       commentsLoader.classList.add('hidden');
@@ -95,7 +94,7 @@ closePictureButton.addEventListener('click', onCloseClick);
 document.addEventListener('keydown', onEscapePress);
 
 const postPhotoImage = document.querySelector('.big-picture__img').querySelector('img');
-postPhotoImage.src=`../photos/${getRandomPositiveInteger(1,POSTS_COUNT)}.jpg`;
+postPhotoImage.src=`photos/${getRandomPositiveInteger(1,POSTS_COUNT)}.jpg`;
 if (!randomComments.length === 0) {
   postPhotoImage.alt=`${randomComments[getRandomPositiveInteger(0,randomComments.length)].name}`;
 }

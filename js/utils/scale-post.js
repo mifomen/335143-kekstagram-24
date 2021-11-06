@@ -7,23 +7,25 @@ const MAX_SIZE = 100;
 const MIN_SIZE = 25;
 const STEP = 25;
 
-const defaultScale= 100;
-resizeInput.value = `${defaultScale}%`;
+const DEFAULT_SCALE = 100;
+const DEFAULT_PARSEINT = 10;
+
+resizeInput.value = `${DEFAULT_SCALE}%`;
 
 // const scaledImage = () => {}
 
 btnResizeMinus.addEventListener('click', () => {
-  if (parseInt(resizeInput.value,10) <= MIN_SIZE + STEP) {resizeInput.value = '0%';} else {
-    resizeInput.value = `${parseInt(resizeInput.value,10) - STEP}%`;
+  if (parseInt(resizeInput.value,DEFAULT_PARSEINT) <= MIN_SIZE + STEP) {resizeInput.value = '0%';} else {
+    resizeInput.value = `${parseInt(resizeInput.value,DEFAULT_PARSEINT) - STEP}%`;
   }
-  preview.style.transform = `scale(0${parseInt(resizeInput.value,10) / defaultScale })`;
+  preview.style.transform = `scale(0${parseInt(resizeInput.value,DEFAULT_PARSEINT) / DEFAULT_SCALE })`;
 });
 
 btnResizePlus.addEventListener('click', () => {
-  if (parseInt(resizeInput.value,10) >= MAX_SIZE - STEP ) {resizeInput.value = `${defaultScale}%`;} else {
-    resizeInput.value = `${parseInt(resizeInput.value,10) + STEP}%`;
+  if (parseInt(resizeInput.value,DEFAULT_PARSEINT) >= MAX_SIZE - STEP ) {resizeInput.value = `${DEFAULT_SCALE}%`;} else {
+    resizeInput.value = `${parseInt(resizeInput.value,DEFAULT_PARSEINT) + STEP}%`;
   }
-  preview.style.transform = `scale(0${parseInt(resizeInput.value,10) / defaultScale })`;
+  preview.style.transform = `scale(0${parseInt(resizeInput.value,DEFAULT_PARSEINT) / DEFAULT_SCALE })`;
 });
 
 // document.querySelector('.big-picture').classList.add('hidden');

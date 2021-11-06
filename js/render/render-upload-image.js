@@ -67,32 +67,21 @@ const testStringOnHashtag = (item) => {
 const checkHashtagCounts = (item) => {
   if ( item.value.length > MIN_HASHTAG_COUNT ) {
     const arr = item.value.split(' ');
-    if (arr.length <= MAX_HASHTAG_COUNT) {
-      return true;
-    } else {
-      return false;
-    }
+    return (arr.length <= MAX_HASHTAG_COUNT);
   }
 };
 
 const checkHashtagEvery = (item) => {
   if ( item.value.length > MIN_HASHTAG_COUNT ) {
     const arr = item.value.split(' ');
-    if (arr.every(testStringOnHashtag)) {
-      return true;
-    } else {
-      return false;
-    }
+    return(arr.every(testStringOnHashtag));
   }
 };
 
-// inputHashtag.value = '#121a3 #12333 #mifomf #mifme';
 
 inputHashtag.addEventListener('input', () => {
   const valueLength = inputHashtag.value.length;
 
-  // testHashtag(inputHashtag);
-  // console.log(testHashtag(inputHashtag))
 
   if (inputHashtag.value[0] !== '#') {
     inputHashtag.setCustomValidity('ХэшТег должен начинаться с #');
@@ -100,8 +89,13 @@ inputHashtag.addEventListener('input', () => {
     inputHashtag.setCustomValidity(`Еще ${ MIN_HASHTAG_LENGTH - valueLength} символа`);
   } else if (templateHashtag.test(inputHashtag.value) && valueLength > MAX_HASHTAG_LENGTH) {
     inputHashtag.setCustomValidity(`Набрали на ${ valueLength - MAX_HASHTAG_LENGTH } лишних символов`);
+  // } else if (inputHashtag.value[inputHashtag.value.length] == ' ' && valueLength > 0) {
+  //   inputHashtag.value = inputHashtag.value.trim();
   } else if (inputHashtag.value[inputHashtag.value.length-1] === ' ') {
-    inputHashtag.setCustomValidity('Пробелы в конце нельзя');
+    inputHashtag.value = inputHashtag.value.trim();
+    // inputHashtag.setCustomValidity('Пробелы в конце нельзя');
+  // } else if (!document.activeElement) {
+  //   inputHashtag.value = inputHashtag.value.trim();
   } else if (!checkHashtagCounts(inputHashtag) === true) {
     inputHashtag.setCustomValidity('У вас много хэштегов, максимум 5');
   } else if (!checkHashtagEvery(inputHashtag) === true) {
@@ -109,19 +103,10 @@ inputHashtag.addEventListener('input', () => {
   } else {
     inputHashtag.setCustomValidity('');
   }
-
+  //eslint-disable-next-line
+  console.log(inputHashtag.value[valueLength])
   inputHashtag.reportValidity();
 });
-
-// inputDescription.addEventListener('input', () => {
-//   const valueLength = inputDescription.value.length;
-//   if (!checkStringLength(inputDescription.value,MAX_DESCRIPTION_LENGTH)) {
-//     inputDescription.setCustomValidity(`Набрали на ${ valueLength - MAX_DESCRIPTION_LENGTH } лишних символов`);
-//   } else {
-//     inputDescription.setCustomValidity('');
-//   }
-//   inputDescription.reportValidity();
-// });
 
 
 uploadFile.addEventListener('click', () => {

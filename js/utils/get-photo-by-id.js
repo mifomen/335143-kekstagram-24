@@ -1,2 +1,2 @@
-export const getPhotoById = (countOfPosts) => `../photos/${countOfPosts}.jpg`;
+export const getPhotoById = (countOfPosts) => `photos/${countOfPosts}.jpg`;
 
