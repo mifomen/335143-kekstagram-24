@@ -82,12 +82,17 @@ const checkHashtagEvery = (item) => {
   }
 };
 
+
+/* eslint-disable */
+
+
 const checkDuplicates = function(arrItem) {
   return arrItem.every( (item,index) => {
     return arrItem.indexOf(item) === index;
   });
 };
 
+/* eslint-enable */
 inputHashtag.addEventListener('input', () => {
   const valueLength = inputHashtag.value.length;
 
