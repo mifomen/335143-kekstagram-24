@@ -59,9 +59,9 @@ const onLoadImage = () => {
 uploadForm.addEventListener('change', onLoadImage);
 
 
-const valueToArray = (item) => {
+const valueToArray = function(item) {
   return item.value.split(' ');
-}
+};
 
 
 const testStringOnHashtag = (item) => {
@@ -82,11 +82,11 @@ const checkHashtagEvery = (item) => {
   }
 };
 
-const checkDuplicates = (arrItem) => {
-  return arrItem.every((item,index) => {
-  return arrItem.indexOf(item) == index;
-})
-}
+const checkDuplicates = function(arrItem) {
+  return arrItem.every( (item,index) => {
+    return arrItem.indexOf(item) === index;
+  });
+};
 
 inputHashtag.addEventListener('input', () => {
   const valueLength = inputHashtag.value.length;
@@ -99,10 +99,10 @@ inputHashtag.addEventListener('input', () => {
   } else if (templateHashtag.test(inputHashtag.value) && valueLength > MAX_HASHTAG_LENGTH) {
     inputHashtag.setCustomValidity(`Набрали на ${ valueLength - MAX_HASHTAG_LENGTH } лишних символов`);
   } else if (!checkDuplicates(valueToArray(inputHashtag)) === true) {
-    inputHashtag.setCustomValidity('Есть повторяющие хэштеги, так нельзя')
+    inputHashtag.setCustomValidity('Есть повторяющие хэштеги, так нельзя');
   } else if (inputHashtag.value[inputHashtag.value.length-1] === ' ' && valueToArray(inputHashtag).length >= 5 ) {
     inputHashtag.value = inputHashtag.value.trim();
-  } else if (!checkHashtagCounts(inputHashtag) === true) {
+  } else if (!checkHashtagCounts(inputHashtag) === true && valueToArray(inputHashtag).length >= 2 ) {
     inputHashtag.setCustomValidity('У вас много хэштегов, максимум 5');
   } else if (!checkHashtagEvery(inputHashtag) === true) {
     inputHashtag.setCustomValidity('У вас неправильно набран хэштег');
@@ -110,7 +110,6 @@ inputHashtag.addEventListener('input', () => {
     inputHashtag.setCustomValidity('');
   }
 
-console.log(`${checkHashtagCounts(inputHashtag)}`)
   inputHashtag.reportValidity();
 });
 
