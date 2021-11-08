@@ -84,11 +84,12 @@ const checkHashtagEvery = (item) => {
 
 
 const checkDuplicates = function(arrItem) {
-  return arrItem.every( (item,index) => { /* eslint-disable-line */
-    return arrItem.indexOf(item) === index;
+  const set = new Set();
+  arrItem.forEach((item) => {
+    set.add(item);
   });
+  return set.size === arrItem.length;
 };
-
 
 inputHashtag.addEventListener('input', () => {
   const valueLength = inputHashtag.value.length;
@@ -111,7 +112,6 @@ inputHashtag.addEventListener('input', () => {
   } else {
     inputHashtag.setCustomValidity('');
   }
-
   inputHashtag.reportValidity();
 });
 
