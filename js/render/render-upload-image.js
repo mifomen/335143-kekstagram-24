@@ -58,15 +58,10 @@ const onLoadImage = () => {
 
 uploadForm.addEventListener('change', onLoadImage);
 
- const test = {
-  value: '#123 #123123 #123123123 #1xzczxc #123 123',
-  text: 'miomen'
- }
 
 const valueToArray = (item) => {
   return item.value.split(' ');
 }
-console.log(valueToArray(test))
 
 
 const testStringOnHashtag = (item) => {
@@ -77,18 +72,21 @@ const testStringOnHashtag = (item) => {
 
 const checkHashtagCounts = (item) => {
   if ( item.value.length > MIN_HASHTAG_COUNT ) {
-    // const arr = item.value.split(' ');
     return (valueToArray(item).length <= MAX_HASHTAG_COUNT);
   }
 };
 
 const checkHashtagEvery = (item) => {
   if ( item.value.length > MIN_HASHTAG_COUNT ) {
-    // const arr = item.value.split(' ');
     return(valueToArray(item).every(testStringOnHashtag));
   }
 };
 
+const checkDuplicates = (arrItem) => {
+  return arrItem.every((item,index) => {
+  return arrItem.indexOf(item) == index;
+})
+}
 
 inputHashtag.addEventListener('input', () => {
   const valueLength = inputHashtag.value.length;
@@ -100,15 +98,10 @@ inputHashtag.addEventListener('input', () => {
     inputHashtag.setCustomValidity(`Еще ${ MIN_HASHTAG_LENGTH - valueLength} символа`);
   } else if (templateHashtag.test(inputHashtag.value) && valueLength > MAX_HASHTAG_LENGTH) {
     inputHashtag.setCustomValidity(`Набрали на ${ valueLength - MAX_HASHTAG_LENGTH } лишних символов`);
-  // } else if (inputHashtag.value[inputHashtag.value.length] == ' ' && valueLength > 0) {
-  //   inputHashtag.value = inputHashtag.value.trim();
-
-  // inputHashtag.value[inputHashtag.value.length-1] === ' ' &&
-  } else if (inputHashtag.value[inputHashtag.value.length-1] === ' ' && valueToArray(inputHashtag).length >= 3 ) {
+  } else if (!checkDuplicates(valueToArray(inputHashtag)) === true) {
+    inputHashtag.setCustomValidity('Есть повторяющие хэштеги, так нельзя')
+  } else if (inputHashtag.value[inputHashtag.value.length-1] === ' ' && valueToArray(inputHashtag).length >= 5 ) {
     inputHashtag.value = inputHashtag.value.trim();
-    // inputHashtag.setCustomValidity('Пробелы в конце нельзя');
-  // } else if (!document.activeElement) {
-  //   inputHashtag.value = inputHashtag.value.trim();
   } else if (!checkHashtagCounts(inputHashtag) === true) {
     inputHashtag.setCustomValidity('У вас много хэштегов, максимум 5');
   } else if (!checkHashtagEvery(inputHashtag) === true) {
@@ -116,8 +109,8 @@ inputHashtag.addEventListener('input', () => {
   } else {
     inputHashtag.setCustomValidity('');
   }
-  //eslint-disable-next-line
-  console.log(`valueToArray(inputHasht=${valueToArray(inputHashtag)} length=${valueToArray(inputHashtag).length}`);
+
+console.log(`${checkHashtagCounts(inputHashtag)}`)
   inputHashtag.reportValidity();
 });
 
