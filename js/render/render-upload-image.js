@@ -94,7 +94,7 @@ const checkDuplicates = function(arrItem) {
 inputHashtag.addEventListener('input', () => {
   const valueLength = inputHashtag.value.length;
 
-
+  // поставь над этим блоком комментарий, пожалуйста: переписать через switch-case
   if (inputHashtag.value[0] !== '#') {
     inputHashtag.setCustomValidity('ХэшТег должен начинаться с #');
   } else if (templateHashtag.test(inputHashtag.value) && valueLength < MIN_HASHTAG_LENGTH) {
@@ -103,9 +103,9 @@ inputHashtag.addEventListener('input', () => {
     inputHashtag.setCustomValidity(`Набрали на ${ valueLength - MAX_HASHTAG_LENGTH } лишних символов`);
   } else if (!checkDuplicates(valueToArray(inputHashtag)) === true) {
     inputHashtag.setCustomValidity('Есть повторяющие хэштеги, так нельзя');
-  } else if (inputHashtag.value[inputHashtag.value.length-1] === ' ' && valueToArray(inputHashtag).length >= 5 ) {
+  } else if (inputHashtag.value[inputHashtag.value.length-1] === ' ' && valueToArray(inputHashtag).length >= MAX_HASHTAG_COUNT ) {
     inputHashtag.value = inputHashtag.value.trim();
-  } else if (!checkHashtagCounts(inputHashtag) === true && valueToArray(inputHashtag).length >= 2 ) {
+  } else if (!checkHashtagCounts(inputHashtag) === true && valueToArray(inputHashtag).length >= MIN_HASHTAG_LENGTH) {
     inputHashtag.setCustomValidity('У вас много хэштегов, максимум 5');
   } else if (!checkHashtagEvery(inputHashtag) === true) {
     inputHashtag.setCustomValidity('У вас неправильно набран хэштег');

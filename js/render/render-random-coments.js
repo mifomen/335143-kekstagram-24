@@ -32,17 +32,20 @@ const commentCount = document.querySelector('.social__comment-count');
 if (countRenderComment >= randomComments.length) {
   commentCount.textContent=`${randomComments.length} из ${randomComments.length}`;
 } else {
-  commentCount.textContent=`5 из ${randomComments.length}`;
+  commentCount.textContent=`${countRenderComment} из ${randomComments.length}`;
 }
 
 
 const commentsLoader = document.querySelector('.comments-loader');
 
+const renderCount = 5;
+
 if (randomComments.length <= countRenderComment) {
   commentsLoader.classList.add('hidden');
 } else {
   commentsLoader.addEventListener('click',() =>{
-    countRenderComment = countRenderComment+5;
+
+    countRenderComment = countRenderComment+renderCount;
     renderRandomComments(countRenderComment);
     if (countRenderComment >=randomComments.length) {
       commentCount.textContent=`${randomComments.length} из ${randomComments.length}`;
@@ -59,7 +62,7 @@ likesCount.textContent = getRandomPositiveInteger(MIN_LIKES,MAX_LIKES);
 const imgDescription = document.querySelector('.social__caption');
 imgDescription.textContent= getRandomArrayElement(DESCRIPTIONS);
 
-export const body = document.body;
+const body = document.body;
 body.classList.add('modal-open');
 
 const bigPicture = document.querySelector('.big-picture');
