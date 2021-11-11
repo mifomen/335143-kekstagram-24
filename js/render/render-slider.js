@@ -126,22 +126,22 @@ sliderElement.noUiSlider.on('update', (values, handle) => {
   }
 
   if (document.querySelector('#effect-chrome').checked) {
-    photoPreview.style.cssText=`filter: grayscale(${values[handle]})`;
+    photoPreview.style.filter=`grayscale(${values[handle]})`;
   }
   if (document.querySelector('#effect-sepia').checked){
-    photoPreview.style.cssText=`filter: sepia(${valueElement.value})`;
+    photoPreview.style.filter=`sepia(${valueElement.value})`;
   }
 
   if (document.querySelector('#effect-marvin').checked){
-    photoPreview.style.cssText=`filter: invert(${valueElement.value}%)`;
+    photoPreview.style.filter=`invert(${valueElement.value}%)`;
   }
 
   if (document.querySelector('#effect-phobos').checked){
-    photoPreview.style.cssText=`filter: blur(${valueElement.value}px)`;
+    photoPreview.style.filter=`blur(${valueElement.value}px)`;
   }
 
   if (document.querySelector('#effect-heat').checked){
-    photoPreview.style.cssText=`filter: brightness(${valueElement.value})`;
+    photoPreview.style.filter=`brightness(${valueElement.value})`;
   }
 });
 
