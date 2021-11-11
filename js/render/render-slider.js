@@ -58,28 +58,30 @@ const settingOfSlider = {
 //eslint-disable-next-line
 console.log(sliderElement);
 
-
-noUiSlider.create(sliderElement, {
-  start: 0.5,
-  connect: 'lower',
-  range: {
-    'min': 0,
-    'max': 1,
-  },
-  step: 0.1,
-  format: {
-    to: function (value) {
-      if (Number.isInteger(value)) {
-        return value.toFixed(0);
-      }
-      return value.toFixed(1);
+const createSlide = (element) => {
+  noUiSlider.create(element , {
+    start: settingOfSlider.chrome.start,
+    connect: 'lower',
+    range: {
+      'min': settingOfSlider.chrome.range.min,
+      'max': settingOfSlider.chrome.range.max,
     },
-    from: function (value) {
-      return parseFloat(value);
+    step: settingOfSlider.chrome.step,
+    format: {
+      to: function (value) {
+        if (Number.isInteger(value)) {
+          return value.toFixed(0);
+        }
+        return value.toFixed(1);
+      },
+      from: function (value) {
+        return parseFloat(value);
+      },
     },
-  },
-});
+  });
+};
 
+createSlide(sliderElement);
 const allEffectsBtns = document.querySelectorAll('.effects__radio');
 
 for (const effectBtn of allEffectsBtns) {
@@ -88,22 +90,36 @@ for (const effectBtn of allEffectsBtns) {
 
     if (evt.target===document.querySelector('#effect-chrome')) {
       sliderElement.noUiSlider.updateOptions(settingOfSlider.chrome);
+      if (sliderLine.classList.contains('hidden')) {
+        sliderLine.classList.remove('hidden');
+      }
+    // sliderElement.noUiSlider.destroy();
     } else {
 
       if (evt.target===document.querySelector('#effect-sepia')) {
         sliderElement.noUiSlider.updateOptions(settingOfSlider.sepia);
+        if (sliderLine.classList.contains('hidden')) {
+          sliderLine.classList.remove('hidden');
+        }
         // sliderElement.noUiSlider.updateOptions(settingOfSlider.sepia);
       } else {
 
         if (evt.target===document.querySelector('#effect-marvin')) {
+          if (sliderLine.classList.contains('hidden')) {
+            sliderLine.classList.remove('hidden');
+          }
           sliderElement.noUiSlider.updateOptions(settingOfSlider.marvin);
         } else {
 
           if (evt.target===document.querySelector('#effect-phobos')) {
+            if (sliderLine.classList.contains('hidden')) {
+              sliderLine.classList.remove('hidden');
+            }
             sliderElement.noUiSlider.updateOptions(settingOfSlider.phobos);
           } else {
 
             if (evt.target===document.querySelector('#effect-heat')) {
+              sliderLine.classList.remove('hidden');
               sliderElement.noUiSlider.updateOptions(settingOfSlider.heat);
             }
           }
@@ -115,17 +131,15 @@ for (const effectBtn of allEffectsBtns) {
 // console.log(photoPreview)
 // console.log(`settingOfSlider.chrome= ${settingOfSlider.chrome}`);
 
-
 sliderElement.noUiSlider.on('update', (values, handle) => {
   valueElement.value = values[handle];
 
   if (document.querySelector('#effect-none').checked) {
     photoPreview.style.cssText='';
-    // sliderElement.noUiSlider.destroy();
-    // sliderLine.classList.add('hidden');
   }
 
   if (document.querySelector('#effect-chrome').checked) {
+    sliderLine.classList.remove('hidden');
     photoPreview.style.filter=`grayscale(${values[handle]})`;
   }
   if (document.querySelector('#effect-sepia').checked){
