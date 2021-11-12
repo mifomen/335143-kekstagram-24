@@ -12,7 +12,6 @@ const DEFAULT_PARSEINT = 10;
 
 resizeInput.value = `${DEFAULT_SCALE}%`;
 
-// const scaledImage = () => {}
 
 btnResizeMinus.addEventListener('click', () => {
   if (parseInt(resizeInput.value,DEFAULT_PARSEINT) <= MIN_SIZE + STEP) {resizeInput.value = '0%';} else {
@@ -27,8 +26,5 @@ btnResizePlus.addEventListener('click', () => {
   }
   preview.style.transform = `scale(0${parseInt(resizeInput.value,DEFAULT_PARSEINT) / DEFAULT_SCALE })`;
 });
-
-// document.querySelector('.big-picture').classList.add('hidden');
-
 
 export {resizeInput,preview};

@@ -13,11 +13,10 @@ const templateHashtag = /^#[A-Za-zА-Яа-яЁё0-9]{1,19}$/;
 const inputHashtag = document.querySelector('.text__hashtags');
 const inputDescription = document.querySelector('.text__description');
 const photoPreview = document.querySelector('.img-upload__preview img');
-// const uploadBtnSubmit = document.querySelector('.img-upload__submit');
 
 const uploadFile = document.querySelector('#upload-file');
 const effectList = document.querySelectorAll('.effects__preview');
-
+const sliderLine = document.querySelector('.effect-level');
 
 const onEscapePress = () => {
   if (event.code === 'Escape' && !uploadImageOverlay.classList.contains('hidden') && inputHashtag !==document.activeElement && inputDescription !== document.activeElement) {
@@ -82,35 +81,45 @@ const checkHashtagEvery = (item) => {
   }
 };
 
-
 const checkDuplicates = function(arrItem) {
-  const set = new Set();
-  arrItem.forEach((item) => {
-    set.add(item);
-  });
+  const set = new Set(arrItem);
   return set.size === arrItem.length;
 };
 
 inputHashtag.addEventListener('input', () => {
   const valueLength = inputHashtag.value.length;
 
+  switch (true) {
+    case inputHashtag.value[0] !== '#':
+      inputHashtag.setCustomValidity('ХэшТег должен начинаться с #');
+      break;
 
-  if (inputHashtag.value[0] !== '#') {
-    inputHashtag.setCustomValidity('ХэшТег должен начинаться с #');
-  } else if (templateHashtag.test(inputHashtag.value) && valueLength < MIN_HASHTAG_LENGTH) {
-    inputHashtag.setCustomValidity(`Еще ${ MIN_HASHTAG_LENGTH - valueLength} символа`);
-  } else if (templateHashtag.test(inputHashtag.value) && valueLength > MAX_HASHTAG_LENGTH) {
-    inputHashtag.setCustomValidity(`Набрали на ${ valueLength - MAX_HASHTAG_LENGTH } лишних символов`);
-  } else if (!checkDuplicates(valueToArray(inputHashtag)) === true) {
-    inputHashtag.setCustomValidity('Есть повторяющие хэштеги, так нельзя');
-  } else if (inputHashtag.value[inputHashtag.value.length-1] === ' ' && valueToArray(inputHashtag).length >= 5 ) {
-    inputHashtag.value = inputHashtag.value.trim();
-  } else if (!checkHashtagCounts(inputHashtag) === true && valueToArray(inputHashtag).length >= 2 ) {
-    inputHashtag.setCustomValidity('У вас много хэштегов, максимум 5');
-  } else if (!checkHashtagEvery(inputHashtag) === true) {
-    inputHashtag.setCustomValidity('У вас неправильно набран хэштег');
-  } else {
-    inputHashtag.setCustomValidity('');
+    case templateHashtag.test(inputHashtag.value) && valueLength < MIN_HASHTAG_LENGTH:
+      inputHashtag.setCustomValidity(`Еще ${ MIN_HASHTAG_LENGTH - valueLength} символа`);
+      break;
+
+    case (templateHashtag.test(inputHashtag.value) && valueLength > MAX_HASHTAG_LENGTH):
+      inputHashtag.setCustomValidity(`Набрали на ${ valueLength - MAX_HASHTAG_LENGTH } лишних символов`);
+      break;
+
+    case !checkDuplicates(valueToArray(inputHashtag)) === true:
+      inputHashtag.setCustomValidity('Есть повторяющие хэштеги, так нельзя');
+      break;
+
+    case inputHashtag.value[inputHashtag.value.length-1] === ' ' && valueToArray(inputHashtag).length >= MAX_HASHTAG_COUNT:
+      inputHashtag.value = inputHashtag.value.trim();
+      break;
+
+    case !checkHashtagCounts(inputHashtag) === true && valueToArray(inputHashtag).length >= MIN_HASHTAG_LENGTH:
+      inputHashtag.setCustomValidity('У вас много хэштегов, максимум 5');
+      break;
+
+    case !checkHashtagEvery(inputHashtag) === true:
+      inputHashtag.setCustomValidity('У вас неправильно набран хэштег');
+      break;
+
+    default: inputHashtag.setCustomValidity('');
+      inputHashtag.setCustomValidity('');
   }
   inputHashtag.reportValidity();
 });
@@ -119,5 +128,9 @@ inputHashtag.addEventListener('input', () => {
 uploadFile.addEventListener('click', () => {
   resizeInput.value = '100%';
   preview.style.transform = 'scale(1)';
+  preview.style.filter='';
+  if (!sliderLine.classList.contains('hidden')) {
+    sliderLine.classList.add('hidden');
+  }
 });
 
