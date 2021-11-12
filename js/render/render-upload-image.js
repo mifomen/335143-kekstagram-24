@@ -17,7 +17,7 @@ const photoPreview = document.querySelector('.img-upload__preview img');
 
 const uploadFile = document.querySelector('#upload-file');
 const effectList = document.querySelectorAll('.effects__preview');
-
+const sliderLine = document.querySelector('.effect-level');
 
 const onEscapePress = () => {
   if (event.code === 'Escape' && !uploadImageOverlay.classList.contains('hidden') && inputHashtag !==document.activeElement && inputDescription !== document.activeElement) {
@@ -82,12 +82,8 @@ const checkHashtagEvery = (item) => {
   }
 };
 
-
 const checkDuplicates = function(arrItem) {
-  const set = new Set();
-  arrItem.forEach((item) => {
-    set.add(item);
-  });
+  const set = new Set(arrItem);
   return set.size === arrItem.length;
 };
 
@@ -119,5 +115,9 @@ inputHashtag.addEventListener('input', () => {
 uploadFile.addEventListener('click', () => {
   resizeInput.value = '100%';
   preview.style.transform = 'scale(1)';
+  preview.style.filter='';
+  if (!sliderLine.classList.contains('hidden')) {
+    sliderLine.classList.add('hidden');
+  }
 });
 

@@ -1,11 +1,21 @@
 const sliderElement = document.querySelector('.effect-level__slider');
 const valueElement = document.querySelector('.effect-level__value');
-// const specialElements = document.querySelectorAll('.effects__preview');
-
 const photoPreview = document.querySelector('.img-upload__preview img');
-
-//eslint-disable-next-line
+const allEffectsBtns = document.querySelectorAll('.effects__radio');
 const sliderLine = document.querySelector('.effect-level');
+
+const btnEffectNone= document.querySelector('#effect-none');
+const btnEffectChrome = document.querySelector('#effect-chrome');
+const btnEffectSepia= document.querySelector('#effect-sepia');
+const btnEffectMarvin= document.querySelector('#effect-marvin');
+const btnEffectPhobos= document.querySelector('#effect-phobos');
+const btnEffectHeat= document.querySelector('#effect-heat');
+
+const GRAYSCALE_FILTER = 'grayscale';
+const SEPIA_FILTER = 'sepia';
+const INVERT_FILTER = 'invert';
+const PHOBOS_FILTER = 'blur';
+const BRIGHTNESS_FILTER = 'brightness';
 
 const settingOfSlider = {
   chrome: {
@@ -13,7 +23,7 @@ const settingOfSlider = {
       min: 0,
       max: 1,
     },
-    start: 0.2,
+    start: 1,
     step: 0.1,
   },
   sepia: {
@@ -21,7 +31,7 @@ const settingOfSlider = {
       min: 0,
       max: 1,
     },
-    start: 0.2,
+    start: 1,
     step: 0.1,
   },
   marvin: {
@@ -29,7 +39,7 @@ const settingOfSlider = {
       min: 0,
       max: 100,
     },
-    start: 40,
+    start: 100,
     step: 1,
   },
   phobos: {
@@ -37,7 +47,7 @@ const settingOfSlider = {
       min: 0,
       max: 3,
     },
-    start: 1.7,
+    start: 3,
     step: 0.1,
   },
   heat: {
@@ -45,18 +55,10 @@ const settingOfSlider = {
       min: 0,
       max: 3,
     },
-    start: 2.6,
+    start: 3,
     step: 0.1,
   },
 };
-
-// console.log(settingOfSlider)
-
-// document.querySelector('.big-picture ').classList.add('hidden');
-// document.querySelector('.img-upload__overlay').classList.remove('hidden');
-
-//eslint-disable-next-line
-console.log(sliderElement);
 
 const createSlide = (element) => {
   noUiSlider.create(element , {
@@ -81,104 +83,82 @@ const createSlide = (element) => {
   });
 };
 
+const addClassOnItem = (item,itemClass) => {
+  if (item.classList.contains(itemClass)) {
+    item.classList.remove(itemClass);
+  }
+};
+
 createSlide(sliderElement);
-const allEffectsBtns = document.querySelectorAll('.effects__radio');
+
+
+if (!sliderLine.classList.contains('hidden')) {
+  sliderLine.classList.add('hidden');
+}
 
 for (const effectBtn of allEffectsBtns) {
-
   effectBtn.addEventListener('click', (evt) => {
 
-    if (evt.target===document.querySelector('#effect-chrome')) {
-      sliderElement.noUiSlider.updateOptions(settingOfSlider.chrome);
-      if (sliderLine.classList.contains('hidden')) {
-        sliderLine.classList.remove('hidden');
-      }
-    // sliderElement.noUiSlider.destroy();
-    } else {
+    if (!sliderLine.classList.contains('hidden')) {
+      sliderLine.classList.add('hidden');
+    }
 
-      if (evt.target===document.querySelector('#effect-sepia')) {
+    switch (evt.target) {
+      case btnEffectNone:
+        if (!sliderLine.classList.contains('hidden')) {
+          sliderLine.classList.add('hidden');
+        }
+        photoPreview.style.filter='';
+        break;
+
+      case btnEffectChrome:
+        addClassOnItem(sliderLine,'hidden');
+        sliderElement.noUiSlider.updateOptions(settingOfSlider.chrome);
+        break;
+
+      case btnEffectSepia:
+        addClassOnItem(sliderLine,'hidden');
         sliderElement.noUiSlider.updateOptions(settingOfSlider.sepia);
-        if (sliderLine.classList.contains('hidden')) {
-          sliderLine.classList.remove('hidden');
-        }
-        // sliderElement.noUiSlider.updateOptions(settingOfSlider.sepia);
-      } else {
+        break;
 
-        if (evt.target===document.querySelector('#effect-marvin')) {
-          if (sliderLine.classList.contains('hidden')) {
-            sliderLine.classList.remove('hidden');
-          }
-          sliderElement.noUiSlider.updateOptions(settingOfSlider.marvin);
-        } else {
+      case btnEffectMarvin:
+        addClassOnItem(sliderLine,'hidden');
+        sliderElement.noUiSlider.updateOptions(settingOfSlider.marvin);
+        break;
 
-          if (evt.target===document.querySelector('#effect-phobos')) {
-            if (sliderLine.classList.contains('hidden')) {
-              sliderLine.classList.remove('hidden');
-            }
-            sliderElement.noUiSlider.updateOptions(settingOfSlider.phobos);
-          } else {
+      case btnEffectPhobos:
+        addClassOnItem(sliderLine,'hidden');
+        sliderElement.noUiSlider.updateOptions(settingOfSlider.phobos);
+        break;
 
-            if (evt.target===document.querySelector('#effect-heat')) {
-              sliderLine.classList.remove('hidden');
-              sliderElement.noUiSlider.updateOptions(settingOfSlider.heat);
-            }
-          }
-        }
-      }
+      case btnEffectHeat:
+        addClassOnItem(sliderLine,'hidden');
+        sliderElement.noUiSlider.updateOptions(settingOfSlider.heat);
+        break;
     }
   });
 }
-// console.log(photoPreview)
-// console.log(`settingOfSlider.chrome= ${settingOfSlider.chrome}`);
+
 
 sliderElement.noUiSlider.on('update', (values, handle) => {
   valueElement.value = values[handle];
 
-  if (document.querySelector('#effect-none').checked) {
-    photoPreview.style.cssText='';
+  if (btnEffectChrome.checked) {
+    photoPreview.style.filter=`${GRAYSCALE_FILTER}(${values[handle]})`;
+  }
+  if (btnEffectSepia.checked){
+    photoPreview.style.filter=`${SEPIA_FILTER}(${valueElement.value})`;
   }
 
-  if (document.querySelector('#effect-chrome').checked) {
-    sliderLine.classList.remove('hidden');
-    photoPreview.style.filter=`grayscale(${values[handle]})`;
-  }
-  if (document.querySelector('#effect-sepia').checked){
-    photoPreview.style.filter=`sepia(${valueElement.value})`;
+  if (btnEffectMarvin.checked){
+    photoPreview.style.filter=`${INVERT_FILTER}(${valueElement.value}%)`;
   }
 
-  if (document.querySelector('#effect-marvin').checked){
-    photoPreview.style.filter=`invert(${valueElement.value}%)`;
+  if (btnEffectPhobos.checked){
+    photoPreview.style.filter=`${PHOBOS_FILTER}(${valueElement.value}px)`;
   }
 
-  if (document.querySelector('#effect-phobos').checked){
-    photoPreview.style.filter=`blur(${valueElement.value}px)`;
-  }
-
-  if (document.querySelector('#effect-heat').checked){
-    photoPreview.style.filter=`brightness(${valueElement.value})`;
+  if (btnEffectHeat.checked){
+    photoPreview.style.filter=`${BRIGHTNESS_FILTER}(${valueElement.value})`;
   }
 });
-
-// for (const specialElement of specialElements) {
-//   specialElement.addEventListener('change', (evt) => {
-//     if (evt.target.checked) {
-//       sliderElement.noUiSlider.updateOptions({
-//         range: {
-//           min: 1,
-//           max: 10,
-//         },
-//         start: 8,
-//         step: 0.1,
-//       });
-//     } else {
-//       sliderElement.noUiSlider.updateOptions({
-//         range: {
-//           min: 0,
-//           max: 100,
-//         },
-//         step: 1,
-//       });
-//       sliderElement.noUiSlider.set(80);
-//     }
-//   });
-// }

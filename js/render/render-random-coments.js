@@ -38,14 +38,14 @@ if (countRenderComment >= randomComments.length) {
 
 const commentsLoader = document.querySelector('.comments-loader');
 
-const renderCount = 5;
+const RENDER_COUNT = 5;
 
 if (randomComments.length <= countRenderComment) {
   commentsLoader.classList.add('hidden');
 } else {
   commentsLoader.addEventListener('click',() =>{
 
-    countRenderComment = countRenderComment+renderCount;
+    countRenderComment = countRenderComment+RENDER_COUNT;
     renderRandomComments(countRenderComment);
     if (countRenderComment >=randomComments.length) {
       commentCount.textContent=`${randomComments.length} из ${randomComments.length}`;
