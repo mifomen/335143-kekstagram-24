@@ -1,5 +1,4 @@
-export let media=[];
-
+let myData='';
 const createLoader = (onSuccess, onError) => () => {
   return fetch(
     'https://24.javascript.pages.academy/kekstagram/data',
@@ -10,29 +9,40 @@ const createLoader = (onSuccess, onError) => () => {
   )
     .then((response) => {
       if (response.ok) {
-
-        return response.json();
+        return myData = response.json();
       }
 
       throw new Error(`${response.status} ${response.statusText}`);
     })
     .then((data) => {
+      myData = data;
       onSuccess(data);
-      const files = new Array(onSuccess(data));
-      files.forEach(item => {
-        media.push(item);
-      })
-      console.log(`media=${media}`)
     })
     .catch((err) => {
       onError(err);
     });
 };
+myData = (createLoader(console.log,console.error)());
 
-// export {createLoader};
+export {myData}
 
-const loadPosts = createLoader(console.log, console.error);
-loadPosts();
- // media = loadPosts();
+console.log(`server.js myData=${myData}`)
+// console.log(myData);
 
-console.log(media)
+
+// let response = await fetch('https://24.javascript.pages.academy/kekstagram/data',
+//   {
+//     method: 'GET',
+//     credentials: 'same-origin',
+//   }
+// );
+
+// if (response.ok) { // если HTTP-статус в диапазоне 200-299
+//   // получаем тело ответа (см. про этот метод ниже)
+//   let json = await response.json();
+//    myData = json;
+// } else {
+//   alert("Ошибка HTTP: " + response.status);
+// }
+
+

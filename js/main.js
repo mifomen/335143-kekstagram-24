@@ -6,6 +6,6 @@ import './utils/scale-post.js';
 import './render/render-slider.js';
 import './render/server.js';
 
-import {media} from './render/server.js'
+import {myData} from './render/server.js'
 
-console.log(media)
+console.log(`main.js myData=${myData}`)
