@@ -101,3 +101,6 @@ postPhotoImage.src=`photos/${getRandomPositiveInteger(1,POSTS_COUNT)}.jpg`;
 if (!randomComments.length === 0) {
   postPhotoImage.alt=`${randomComments[getRandomPositiveInteger(0,randomComments.length)].name}`;
 }
+
+
+export {renderRandomComments}
