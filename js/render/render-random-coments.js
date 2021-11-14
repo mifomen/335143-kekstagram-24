@@ -3,16 +3,23 @@ import {DESCRIPTIONS,MIN_LIKES,MAX_LIKES,POSTS_COUNT} from '../data/consts.js';
 import {getRandomPositiveInteger} from '../utils/get-random-positive-integer.js';
 import {getRandomComments} from '../utils/get-random-comments.js';
 
-const COMMENTS_LENGTH = getRandomPositiveInteger(1,17);
-const randomComments = new Array(COMMENTS_LENGTH).fill(null).map((item,index)=>getRandomComments(index));
+import {getData} from '../utils/api.js';
 
-const renderRandomComments = function (count)  {
+getData((randomComments) => {
+  renderRandomComments(randomComments);
+  console.log(randomComments.comments);
+});
+
+const COMMENTS_LENGTH = getRandomPositiveInteger(1,17);
+// const randomComments = new Array(COMMENTS_LENGTH).fill(null).map((item,index)=>getRandomComments(index));
+// const randomComments =
+const renderRandomComments = function (commentsArray,count)  {
   const commentsList = document.querySelector('.social__comments');
   const commentElement = document.querySelector('.social__comment');
   const commentFragment = document.createDocumentFragment();
   commentsList.innerHTML='';
 
-  const renderComments = randomComments.slice(0,count+5);
+  const renderComments = commentsArray.slice(0,count+5);
   renderComments.forEach((renderComment) => {
     const copyComment = commentElement.cloneNode(true);
     copyComment.querySelector('.social__picture').src=renderComment.avatar;
@@ -20,14 +27,14 @@ const renderRandomComments = function (count)  {
     copyComment.querySelector('.social__text').textContent=renderComment.message;
     commentFragment.appendChild(copyComment);
   });
-  commentsList.appendChild(commentFragment);
-};
 
 const firstFiveComments = 0;
-renderRandomComments(firstFiveComments);
+// renderRandomComments(firstFiveComments);
 
 let countRenderComment = 5;
 
+  commentsList.appendChild(commentFragment);
+};
 const commentCount = document.querySelector('.social__comment-count');
 if (countRenderComment >= randomComments.length) {
   commentCount.textContent=`${randomComments.length} из ${randomComments.length}`;
@@ -103,4 +110,4 @@ if (!randomComments.length === 0) {
 }
 
 
-export {renderRandomComments}
+export {renderRandomComments};
