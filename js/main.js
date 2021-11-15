@@ -7,21 +7,15 @@ import './render/render-slider.js';
 import {getData} from './utils/api.js';
 import  {renderPicture} from './render/render-picture.js';
 import  './render/picture.js'
-
-
-import {renderRandomComments} from './render/render-random-coments.js';
+import {renderRandomComments,objToArray} from './render/render-random-coments.js';
 
 getData((photoPosts) => {
   renderPicture(photoPosts);
-  console.log('photoPosts', photoPosts);
-  console.log('photoPosts.comments', photoPosts[0].comments);
 
+  renderRandomComments(photoPosts.comments,0)
 
-  console.log(photoPosts)
   const bigPicture = document.querySelector('.big-picture')
-
   const posts = document.querySelectorAll('.picture__img');
-  console.log(posts);
 
   for (let post of posts) {
     post.addEventListener('click', function (evt) {
@@ -35,3 +29,4 @@ getData((photoPosts) => {
     })
   }
 });
+

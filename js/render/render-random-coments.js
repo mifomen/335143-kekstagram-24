@@ -10,10 +10,19 @@ import {getData} from '../utils/api.js';
 //   console.log(randomComments.comments);
 // });
 
+export const objToArray = (obj) => {(
+  // преобразовать в массив, затем map, затем fromEntries обратно объект
+   Object.entries(obj)
+  );
+}
+
 const COMMENTS_LENGTH = getRandomPositiveInteger(1,17);
 // const randomComments = new Array(COMMENTS_LENGTH).fill(null).map((item,index)=>getRandomComments(index));
-// const randomComments =
-const renderRandomComments = function (commentsArray,count)  {
+
+const renderRandomComments = function (commentsArray,count) {
+  // console.log(Object.values(commentsArray))
+  // commentsArray = Object.values(commentsArray);
+  // Object.values(photoPosts[0].comments)
   const commentsList = document.querySelector('.social__comments');
   const commentElement = document.querySelector('.social__comment');
   const commentFragment = document.createDocumentFragment();
@@ -27,12 +36,9 @@ const renderRandomComments = function (commentsArray,count)  {
     copyComment.querySelector('.social__text').textContent=renderComment.message;
     commentFragment.appendChild(copyComment);
   });
-
-const firstFiveComments = 0;
-// renderRandomComments(firstFiveComments);
-
-let countRenderComment = 5;
-
+  // const firstFiveComments = 0;
+  // renderRandomComments(firstFiveComments);
+  // let countRenderComment = 5;
   commentsList.appendChild(commentFragment);
 };
 const commentCount = document.querySelector('.social__comment-count');
