@@ -5,15 +5,6 @@ import {getRandomComments} from '../utils/get-random-comments.js';
 import {getData} from '../utils/api.js';
 
 
-export const objToArray = (obj) => {(
-  // преобразовать в массив, затем map, затем fromEntries обратно объект
-   Object.entries(obj)
-  );
-}
-
-// const COMMENTS_LENGTH = getRandomPositiveInteger(1,17);
-// const randomComments = new Array(COMMENTS_LENGTH).fill(null).map((item,index)=>getRandomComments(index));
-
 const renderComments = function (commentsArray,count) {
   const commentsList = document.querySelector('.social__comments');
   const commentElement = document.querySelector('.social__comment');
@@ -23,7 +14,6 @@ const renderComments = function (commentsArray,count) {
   const createComments = commentsArray.comments.slice(0,count+5);
   createComments.forEach((createComment) => {
     const copyComment = commentElement.cloneNode(true);
-    // console.log(createComment);
     copyComment.querySelector('.social__picture').src=createComment.avatar;
     copyComment.querySelector('.social__picture').alt=createComment.name;
     copyComment.querySelector('.social__text').textContent=createComment.message;
@@ -33,7 +23,6 @@ const renderComments = function (commentsArray,count) {
   const imgDescription = document.querySelector('.social__caption');
   imgDescription.textContent =commentsArray.description;
 
-  // document.addEventListener('keydown', onEscapePress)
 };
 
 const commentCount = document.querySelector('.social__comment-count');
@@ -112,3 +101,5 @@ document.addEventListener('keydown', onEscapePress);
 
 
 export {renderComments};
+
+

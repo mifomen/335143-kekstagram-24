@@ -133,4 +133,3 @@ uploadFile.addEventListener('click', () => {
     sliderLine.classList.add('hidden');
   }
 });
-

@@ -31,13 +31,10 @@ getData((photoPosts) => {
       bigPicture.classList.toggle('overlay');
       document.body.classList.toggle('modal-open');
 
-      console.log('evt.target.src',evt.target.src)
-      let a = evt.target.src;
-      console.log(a)
-      if (evt.target.src='photos/1.jpg') {
-        console.log('they ===')
+      // if (evt.target.src='photos/1.jpg') {
+      //   console.log('they ===')
 
-      }
+      // }
     })
   }
 
