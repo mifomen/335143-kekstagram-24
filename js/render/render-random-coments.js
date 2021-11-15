@@ -5,10 +5,10 @@ import {getRandomComments} from '../utils/get-random-comments.js';
 
 import {getData} from '../utils/api.js';
 
-getData((randomComments) => {
-  renderRandomComments(randomComments);
-  console.log(randomComments.comments);
-});
+// getData((randomComments) => {
+//   renderRandomComments(randomComments);
+//   console.log(randomComments.comments);
+// });
 
 const COMMENTS_LENGTH = getRandomPositiveInteger(1,17);
 // const randomComments = new Array(COMMENTS_LENGTH).fill(null).map((item,index)=>getRandomComments(index));
@@ -36,32 +36,32 @@ let countRenderComment = 5;
   commentsList.appendChild(commentFragment);
 };
 const commentCount = document.querySelector('.social__comment-count');
-if (countRenderComment >= randomComments.length) {
-  commentCount.textContent=`${randomComments.length} из ${randomComments.length}`;
-} else {
-  commentCount.textContent=`${countRenderComment} из ${randomComments.length}`;
-}
+// if (countRenderComment >= randomComments.length) {
+//   commentCount.textContent=`${randomComments.length} из ${randomComments.length}`;
+// } else {
+//   commentCount.textContent=`${countRenderComment} из ${randomComments.length}`;
+// }
 
 
 const commentsLoader = document.querySelector('.comments-loader');
 
 const RENDER_COUNT = 5;
 
-if (randomComments.length <= countRenderComment) {
-  commentsLoader.classList.add('hidden');
-} else {
-  commentsLoader.addEventListener('click',() =>{
+// if (randomComments.length <= countRenderComment) {
+//   commentsLoader.classList.add('hidden');
+// } else {
+//   commentsLoader.addEventListener('click',() =>{
 
-    countRenderComment = countRenderComment+RENDER_COUNT;
-    renderRandomComments(countRenderComment);
-    if (countRenderComment >=randomComments.length) {
-      commentCount.textContent=`${randomComments.length} из ${randomComments.length}`;
-      commentsLoader.classList.add('hidden');
-    } else {
-      commentCount.textContent=`${countRenderComment} из ${randomComments.length}`;
-    }
-  });
-}
+//     countRenderComment = countRenderComment+RENDER_COUNT;
+//     renderRandomComments(countRenderComment);
+//     if (countRenderComment >=randomComments.length) {
+//       commentCount.textContent=`${randomComments.length} из ${randomComments.length}`;
+//       commentsLoader.classList.add('hidden');
+//     } else {
+//       commentCount.textContent=`${countRenderComment} из ${randomComments.length}`;
+//     }
+//   });
+// }
 
 const likesCount = document.querySelector('.likes-count');
 likesCount.textContent = getRandomPositiveInteger(MIN_LIKES,MAX_LIKES);
@@ -105,9 +105,9 @@ document.addEventListener('keydown', onEscapePress);
 
 const postPhotoImage = document.querySelector('.big-picture__img').querySelector('img');
 postPhotoImage.src=`photos/${getRandomPositiveInteger(1,POSTS_COUNT)}.jpg`;
-if (!randomComments.length === 0) {
-  postPhotoImage.alt=`${randomComments[getRandomPositiveInteger(0,randomComments.length)].name}`;
-}
+// if (!randomComments.length === 0) {
+//   postPhotoImage.alt=`${randomComments[getRandomPositiveInteger(0,randomComments.length)].name}`;
+// }
 
 
 export {renderRandomComments};

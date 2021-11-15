@@ -13,7 +13,8 @@ import {renderRandomComments} from './render/render-random-coments.js';
 
 getData((photoPosts) => {
   renderPicture(photoPosts);
-  renderRandomComments(photoPosts,0);
+  console.log('photoPosts', photoPosts);
+  console.log('photoPosts.comments', photoPosts[0].comments);
 
 
   console.log(photoPosts)
