@@ -1,7 +1,8 @@
 import {createComments,onEscapePress} from './create-comments.js';
-  const COMMENTS_STEP = 5;
+const COMMENTS_STEP = 5;
 
 const updateComments = (dataArray) => {
+
   const bigPicture = document.querySelector('.big-picture');
   const posts = document.querySelectorAll('.picture__img');
   bigPicture.classList.add('hidden');
@@ -36,6 +37,12 @@ const updateComments = (dataArray) => {
         if (obj.comments.length - renderCommentsCount < COMMENTS_STEP) {
           commentsLoadBtn.textContent=`${obj.comments.length} из ${obj.comments.length}`;
           createComments(obj,obj.comments.length);
+          loadCommentsBtn.classList.add('hidden');
+          return;
+        }
+        if (renderCommentsCount <= obj.comments.length) {
+          commentsLoadBtn.textContent=`${renderCommentsCount} из ${obj.comments.length}`;
+          createComments(obj,renderCommentsCount);
           loadCommentsBtn.classList.remove('hidden');
         } else {
           loadCommentsBtn.classList.add('hidden');
