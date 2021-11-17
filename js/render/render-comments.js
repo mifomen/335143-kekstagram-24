@@ -2,6 +2,7 @@ import {renderComments,onEscapePress} from './render-coments.js';
 
 
 const renderCommentForPost = (dataArray) => {
+  const COMMENTS_STEP = 5;
   const bigPicture = document.querySelector('.big-picture');
   const posts = document.querySelectorAll('.picture__img');
   bigPicture.classList.add('hidden');
@@ -18,7 +19,7 @@ const renderCommentForPost = (dataArray) => {
       bigPicture.classList.toggle('overlay');
       document.body.classList.toggle('modal-open');
       document.addEventListener('keydown', onEscapePress);
-      const renderCommentsCount = 5;
+      let renderCommentsCount = 5;
       let obj;
       const condition = evt.target.dataset.id;
 
@@ -32,7 +33,7 @@ const renderCommentForPost = (dataArray) => {
       const loadCommentsBtn = document.querySelector('.comments-loader');
       loadCommentsBtn.addEventListener('click', () => {
 
-        renderCommentsCount+=5;
+        renderCommentsCount+=COMMENTS_STEP;
         if (renderCommentsCount <= obj.comments.length) {
           commentsLoadBtn.textContent=`${renderCommentsCount} из ${obj.comments.length}`;
           renderComments(obj,renderCommentsCount);
