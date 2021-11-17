@@ -1,6 +1,3 @@
-// import {similarPhotos} from '../data/gen-new-photo-posts.js';
-// import {getPhotoById} from '../utils/get-photo-by-id.js';
-
 
 const renderPicture = function (renderGetPosts)  {
   const picturesList = document.querySelector('.pictures');
