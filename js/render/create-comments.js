@@ -27,8 +27,8 @@ body.classList.add('modal-open');
 
 const bigPicture = document.querySelector('.big-picture');
 
-export const onEscapePress = () => {
-  if (event.code === 'Escape' && !bigPicture.classList.contains('hidden')) {
+export const onEscapePress = (evt) => {
+  if (evt.code === 'Escape' && !bigPicture.classList.contains('hidden')) {
     hidePicture ();
   }
 };
