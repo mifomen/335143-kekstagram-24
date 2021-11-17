@@ -3,10 +3,13 @@ import './data/gen-new-photo-posts.js';
 import './render/render-random-coments.js';
 import './render/render-upload-image.js';
 import './utils/scale-post.js';
+import {closeUserModal} from './utils/utils.js';
 import './render/render-slider.js';
 import {getData} from './utils/api.js';
 import  {renderPicture} from './render/render-picture.js';
 import  './render/picture.js';
+import {setUserFormSubmit} from './render/render-upload-image.js';
+
 import {renderComments,onEscapePress} from './render/render-random-coments.js';
 
 getData((photoPosts) => {
@@ -70,3 +73,4 @@ getData((photoPosts) => {
   // }
 });
 
+setUserFormSubmit(closeUserModal);

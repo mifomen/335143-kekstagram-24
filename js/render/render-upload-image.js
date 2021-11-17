@@ -1,4 +1,6 @@
 import {resizeInput,preview} from '../utils/scale-post.js';
+import {showError,showSucces} from '../utils/utils.js';
+import {sendData} from '../utils/api.js';
 
 const MIN_HASHTAG_LENGTH = 2;
 const MAX_HASHTAG_LENGTH = 25;
@@ -133,3 +135,19 @@ uploadFile.addEventListener('click', () => {
     sliderLine.classList.add('hidden');
   }
 });
+
+// eslint-disable-next-line
+const setUserFormSubmit = (onSuccess) => {
+  uploadForm.addEventListener('submit', (evt) => {
+    evt.preventDefault();
+
+    sendData(
+      () => onSuccess(showSucces), //(showSucces())
+      () => showError(), // showError()
+      new FormData(evt.target),
+    );
+  });
+};
+// uploadForm.reset();
+// showError,showSucces
+export {setUserFormSubmit};

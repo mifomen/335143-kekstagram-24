@@ -25,7 +25,6 @@ const renderComments = function (commentsArray,count) {
   imgDescription.textContent = commentsArray.description;
 
 };
-
 // const commentCount = document.querySelector('.social__comment-count');
 // if (countRenderComment >= randomComments.length) {
 //   commentCount.textContent=`${randomComments.length} из ${randomComments.length}`;
