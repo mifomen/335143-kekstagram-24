@@ -27,6 +27,8 @@ const showError =() => {
 // showError();
 
 const showSucces = () => {
+  //eslint-disable-next-line
+  console.log('success')
   const succesPopup = document.querySelector('#success');
   const copyPopup = succesPopup.content.cloneNode(true);
   const popupFragment = document.createDocumentFragment();
@@ -34,7 +36,8 @@ const showSucces = () => {
   uploadFormOverlay.classList.add('hidden');
   popupFragment.querySelector('.success__button').addEventListener('click', (evt) => {
     evt.preventDefault();
-    uploadFormOverlay.classList.add('remove');
+    // uploadFormOverlay.classList.add('hidden');
+    uplaodForm.reset();
     document.body.removeChild(document.querySelector('.success'));
 
   });

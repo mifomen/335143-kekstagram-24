@@ -142,7 +142,7 @@ const setUserFormSubmit = (onSuccess) => {
     evt.preventDefault();
 
     sendData(
-      () => onSuccess(showSucces), //(showSucces())
+      () => onSuccess(showSucces()), //(showSucces())
       () => showError(), // showError()
       new FormData(evt.target),
     );
