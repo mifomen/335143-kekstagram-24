@@ -16,7 +16,6 @@ const showError =() => {
   popupFragment.appendChild(copyPopup);
   uploadFormOverlay.classList.add('hidden');
   popupFragment.querySelector('.error__button').addEventListener('click', (evt) => {
-    // uploadFormOverlay.classList.remove('hidden');
     evt.preventDefault();
     document.body.removeChild(document.querySelector('.error'));
     uplaodForm.reset();
@@ -24,11 +23,8 @@ const showError =() => {
   document.body.appendChild(popupFragment);
 };
 
-// showError();
 
 const showSucces = () => {
-  //eslint-disable-next-line
-  console.log('success')
   const succesPopup = document.querySelector('#success');
   const copyPopup = succesPopup.content.cloneNode(true);
   const popupFragment = document.createDocumentFragment();
@@ -36,7 +32,6 @@ const showSucces = () => {
   uploadFormOverlay.classList.add('hidden');
   popupFragment.querySelector('.success__button').addEventListener('click', (evt) => {
     evt.preventDefault();
-    // uploadFormOverlay.classList.add('hidden');
     uplaodForm.reset();
     document.body.removeChild(document.querySelector('.success'));
 
@@ -44,6 +39,16 @@ const showSucces = () => {
   document.body.appendChild(popupFragment);
 };
 
-// showSucces();
+function debounce (callback, timeoutDelay = 500) {
+  let timeoutId;
 
-export {closeUserModal,showError,showSucces};
+  return (...rest) => {
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => callback.apply(this, rest), timeoutDelay);
+  };
+}
+
+const arrayRandomElements = (array) => array.slice().sort(() => Math.random() - 0.5);
+
+export {closeUserModal,showError,showSucces,arrayRandomElements,debounce};
+

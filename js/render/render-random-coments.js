@@ -1,11 +1,3 @@
-// import {getRandomArrayElement} from '../utils/get-random-array-element.js';
-import {MIN_LIKES,MAX_LIKES} from '../data/consts.js';
-import {getRandomPositiveInteger} from '../utils/get-random-positive-integer.js';
-// import {getRandomComments} from '../utils/get-random-comments.js';
-// import {getData} from '../utils/api.js';
-
-// let renderCommentsCount = 5;
-
 const renderComments = function (commentsArray,count) {
   const commentsList = document.querySelector('.social__comments');
   const commentElement = document.querySelector('.social__comment');
@@ -25,39 +17,6 @@ const renderComments = function (commentsArray,count) {
   imgDescription.textContent = commentsArray.description;
 
 };
-// const commentCount = document.querySelector('.social__comment-count');
-// if (countRenderComment >= randomComments.length) {
-//   commentCount.textContent=`${randomComments.length} из ${randomComments.length}`;
-// } else {
-//   commentCount.textContent=`${countRenderComment} из ${randomComments.length}`;
-// }
-
-
-// const commentsLoader = document.querySelector('.comments-loader');
-
-// const RENDER_COUNT = 5;
-
-// if (randomComments.length <= countRenderComment) {
-//   commentsLoader.classList.add('hidden');
-// } else {
-//   commentsLoader.addEventListener('click',() =>{
-
-//     countRenderComment = countRenderComment+RENDER_COUNT;
-//     renderComments(countRenderComment);
-//     if (countRenderComment >=randomComments.length) {
-//       commentCount.textContent=`${randomComments.length} из ${randomComments.length}`;
-//       commentsLoader.classList.add('hidden');
-//     } else {
-//       commentCount.textContent=`${countRenderComment} из ${randomComments.length}`;
-//     }
-//   });
-// }
-
-const likesCount = document.querySelector('.likes-count');
-likesCount.textContent = getRandomPositiveInteger(MIN_LIKES,MAX_LIKES);
-
-// const imgDescription = document.querySelector('.social__caption');
-// imgDescription.textContent= getRandomArrayElement(DESCRIPTIONS);
 
 const body = document.body;
 body.classList.add('modal-open');
@@ -93,12 +52,4 @@ closePictureButton.addEventListener('click', onCloseClick);
 
 document.addEventListener('keydown', onEscapePress);
 
-// const postPhotoImage = document.querySelector('.big-picture__img').querySelector('img');
-// postPhotoImage.src=`photos/${getRandomPositiveInteger(1,POSTS_COUNT)}.jpg`;
-// if (!randomComments.length === 0) {
-//   postPhotoImage.alt=`${randomComments[getRandomPositiveInteger(0,randomComments.length)].name}`;
-// }
-
-
 export {renderComments};
-

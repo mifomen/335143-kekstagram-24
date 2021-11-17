@@ -136,7 +136,6 @@ uploadFile.addEventListener('click', () => {
   }
 });
 
-// eslint-disable-next-line
 const setUserFormSubmit = (onSuccess) => {
   uploadForm.addEventListener('submit', (evt) => {
     evt.preventDefault();
@@ -148,6 +147,4 @@ const setUserFormSubmit = (onSuccess) => {
     );
   });
 };
-// uploadForm.reset();
-// showError,showSucces
 export {setUserFormSubmit};
