@@ -1,6 +1,6 @@
 import { renderPicture } from './render-picture.js';
 import { arrayRandomElements,debounce} from '../utils.js';
-import {renderCommentForPost} from './render-comments.js';
+import {updateComments} from './update-comments.js';
 
 const minPicturesFilter = document.querySelector('.img-filters');
 
@@ -34,17 +34,17 @@ const sortMinPictures = (array) => {
           case 'filter-default':
             removeMinPictures();
             renderPicture(array);
-            renderCommentForPost(array);
+            updateComments(array);
             break;
           case 'filter-random':
             removeMinPictures();
             renderPicture(getRandomPosts(array));
-            renderCommentForPost(array);
+            updateComments(array);
             break;
           case 'filter-discussed':
             removeMinPictures();
             renderPicture(sortByPopular(array));
-            renderCommentForPost(array);
+            updateComments(array);
             break;
         }
       })(filterName);

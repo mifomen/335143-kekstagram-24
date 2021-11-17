@@ -1,7 +1,7 @@
-import {renderComments,onEscapePress} from './render-coments.js';
+import {createComments,onEscapePress} from './create-comments.js';
 
 
-const renderCommentForPost = (dataArray) => {
+const updateComments = (dataArray) => {
   const COMMENTS_STEP = 5;
   const bigPicture = document.querySelector('.big-picture');
   const posts = document.querySelectorAll('.picture__img');
@@ -28,7 +28,7 @@ const renderCommentForPost = (dataArray) => {
           obj = item;}
       });
 
-      renderComments(obj,renderCommentsCount);
+      createComments(obj,renderCommentsCount);
       const commentsLoadBtn = document.querySelector('.social__comment-count');
       const loadCommentsBtn = document.querySelector('.comments-loader');
       loadCommentsBtn.addEventListener('click', () => {
@@ -36,7 +36,7 @@ const renderCommentForPost = (dataArray) => {
         renderCommentsCount+=COMMENTS_STEP;
         if (renderCommentsCount <= obj.comments.length) {
           commentsLoadBtn.textContent=`${renderCommentsCount} из ${obj.comments.length}`;
-          renderComments(obj,renderCommentsCount);
+          createComments(obj,renderCommentsCount);
           loadCommentsBtn.classList.remove('hidden');
         } else {
           loadCommentsBtn.classList.add('hidden');
@@ -56,4 +56,4 @@ const renderCommentForPost = (dataArray) => {
   }
 };
 
-export {renderCommentForPost};
+export {updateComments};

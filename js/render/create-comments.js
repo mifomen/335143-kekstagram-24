@@ -1,11 +1,11 @@
-const renderComments = function (commentsArray,count) {
+const createComments = function (commentsArray,count) {
   const commentsList = document.querySelector('.social__comments');
   const commentElement = document.querySelector('.social__comment');
   const commentFragment = document.createDocumentFragment();
   commentsList.innerHTML='';
 
-  const createComments = commentsArray.comments.slice(0,count);
-  createComments.forEach((createComment) => {
+  const comments = commentsArray.comments.slice(0,count);
+  comments.forEach((createComment) => {
     const copyComment = commentElement.cloneNode(true);
     copyComment.querySelector('.social__picture').src = createComment.avatar;
     copyComment.querySelector('.social__picture').alt = createComment.name;
@@ -26,11 +26,6 @@ const body = document.body;
 body.classList.add('modal-open');
 
 const bigPicture = document.querySelector('.big-picture');
-
-const openPost = function(item) {
-  item.classList.remove('hidden');
-};
-openPost(bigPicture);
 
 export const onEscapePress = () => {
   if (event.code === 'Escape' && !bigPicture.classList.contains('hidden')) {
@@ -56,4 +51,4 @@ closePictureButton.addEventListener('click', onCloseClick);
 
 document.addEventListener('keydown', onEscapePress);
 
-export {renderComments};
+export {createComments};

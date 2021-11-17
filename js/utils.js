@@ -1,7 +1,7 @@
 const userModalElement = document.querySelector('.img-upload__overlay');
 const uploadFormOverlay = document.querySelector('.img-upload__overlay');
 const uplaodForm = document.querySelector('#upload-select-image');
-import {onEscapePress} from './render/render-coments.js';
+import {onEscapePress} from './render/create-comments.js';
 
 function closeUserModal () {
   userModalElement.classList.add('hidden');
