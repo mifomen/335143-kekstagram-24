@@ -1,8 +1,7 @@
 import {createComments,onEscapePress} from './create-comments.js';
-
+  const COMMENTS_STEP = 5;
 
 const updateComments = (dataArray) => {
-  const COMMENTS_STEP = 5;
   const bigPicture = document.querySelector('.big-picture');
   const posts = document.querySelectorAll('.picture__img');
   bigPicture.classList.add('hidden');
