@@ -74,3 +74,4 @@ getData((photoPosts) => {
 });
 
 setUserFormSubmit(closeUserModal);
+//sort()
