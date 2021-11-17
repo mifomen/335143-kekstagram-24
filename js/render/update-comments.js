@@ -19,7 +19,7 @@ const updateComments = (dataArray) => {
       bigPicture.classList.toggle('overlay');
       document.body.classList.toggle('modal-open');
       document.addEventListener('keydown', onEscapePress);
-      let renderCommentsCount = 5;
+      let renderCommentsCount = COMMENTS_STEP;
       let obj;
       const condition = evt.target.dataset.id;
 
