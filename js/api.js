@@ -1,5 +1,8 @@
+const DATA_GET_URL = 'https://24.javascript.pages.academy/kekstagram/data';
+const DATA_POST_URL = 'https://24.javascript.pages.academy/kekstagram';
+
 const getData = (onSuccess) => {
-  fetch('https://24.javascript.pages.academy/kekstagram/data')
+  fetch(DATA_GET_URL)
     .then((response) => response.json())
     .then((photoPosts) => {
       onSuccess(photoPosts);
@@ -7,8 +10,7 @@ const getData = (onSuccess) => {
 };
 
 const sendData = (onSuccess, onFail, body) => {
-  fetch(
-    'https://24.javascript.pages.academy/kekstagram',
+  fetch(DATA_POST_URL,
     {
       method: 'POST',
       body,

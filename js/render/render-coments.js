@@ -7,14 +7,18 @@ const renderComments = function (commentsArray,count) {
   const createComments = commentsArray.comments.slice(0,count);
   createComments.forEach((createComment) => {
     const copyComment = commentElement.cloneNode(true);
-    copyComment.querySelector('.social__picture').src=createComment.avatar;
-    copyComment.querySelector('.social__picture').alt=createComment.name;
-    copyComment.querySelector('.social__text').textContent=createComment.message;
+    copyComment.querySelector('.social__picture').src = createComment.avatar;
+    copyComment.querySelector('.social__picture').alt = createComment.name;
+    copyComment.querySelector('.social__text').textContent = createComment.message;
+
     commentFragment.appendChild(copyComment);
   });
   commentsList.appendChild(commentFragment);
+
   const imgDescription = document.querySelector('.social__caption');
+  const likeCounts =  document.querySelector('.likes-count');
   imgDescription.textContent = commentsArray.description;
+  likeCounts.textContent = commentsArray.likes;
 
 };
 

@@ -1,8 +1,7 @@
-
 const userModalElement = document.querySelector('.img-upload__overlay');
 const uploadFormOverlay = document.querySelector('.img-upload__overlay');
 const uplaodForm = document.querySelector('#upload-select-image');
-import {onEscapePress} from '../render/render-random-coments.js';
+import {onEscapePress} from './render/render-coments.js';
 
 function closeUserModal () {
   userModalElement.classList.add('hidden');
@@ -50,5 +49,9 @@ function debounce (callback, timeoutDelay = 500) {
 
 const arrayRandomElements = (array) => array.slice().sort(() => Math.random() - 0.5);
 
-export {closeUserModal,showError,showSucces,arrayRandomElements,debounce};
+function checkStringLength (string, length) {
+  return string.length <= length;
+}
+
+export {checkStringLength,closeUserModal,showError,showSucces,arrayRandomElements,debounce};
 

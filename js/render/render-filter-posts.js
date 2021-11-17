@@ -1,7 +1,6 @@
 import { renderPicture } from './render-picture.js';
-import { arrayRandomElements } from '../utils/utils.js';
-import { debounce } from '../utils/utils.js';
-import {renderCommentForPost} from './render-comments-for-post.js';
+import { arrayRandomElements,debounce} from '../utils.js';
+import {renderCommentForPost} from './render-comments.js';
 
 const minPicturesFilter = document.querySelector('.img-filters');
 
@@ -9,7 +8,8 @@ const showFilters = () => {
   minPicturesFilter.classList.remove('img-filters--inactive');
 };
 
-const getRandomPosts = (array) => arrayRandomElements(array).slice(0, 10);
+const MAX_COUNT_RANDOM_ITEM = 10;
+const getRandomPosts = (array) => arrayRandomElements(array).slice(0, MAX_COUNT_RANDOM_ITEM);
 
 const removeMinPictures = () => {
   document.querySelectorAll('.picture').forEach((element) => {

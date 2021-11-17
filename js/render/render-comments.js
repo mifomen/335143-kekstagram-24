@@ -1,4 +1,4 @@
-import {renderComments,onEscapePress} from './render-random-coments.js';
+import {renderComments,onEscapePress} from './render-coments.js';
 
 
 const renderCommentForPost = (dataArray) => {
@@ -18,7 +18,7 @@ const renderCommentForPost = (dataArray) => {
       bigPicture.classList.toggle('overlay');
       document.body.classList.toggle('modal-open');
       document.addEventListener('keydown', onEscapePress);
-      let renderCommentsCount = 5;
+      const renderCommentsCount = 5;
       let obj;
       const condition = evt.target.dataset.id;
 
