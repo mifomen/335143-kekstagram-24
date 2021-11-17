@@ -20,8 +20,8 @@ const uploadFile = document.querySelector('#upload-file');
 const effectList = document.querySelectorAll('.effects__preview');
 const sliderLine = document.querySelector('.effect-level');
 
-const onEscapePress = () => {
-  if (event.code === 'Escape' && !uploadImageOverlay.classList.contains('hidden') && inputHashtag !==document.activeElement && inputDescription !== document.activeElement) {
+const onEscapePress = (evt) => {
+  if (evt.code === 'Escape' && !uploadImageOverlay.classList.contains('hidden') && inputHashtag !==document.activeElement && inputDescription !== document.activeElement) {
     uploadImageOverlay.classList.add('hidden');
 
     hideUploadOverlay();
