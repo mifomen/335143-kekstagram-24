@@ -4,23 +4,28 @@ import {updateComments} from './update-comments.js';
 
 const minPicturesFilter = document.querySelector('.img-filters');
 
+//показываем кнопки для фильтрации
 const showFilters = () => {
   minPicturesFilter.classList.remove('img-filters--inactive');
 };
 
+//создаем массив случайных постов
 const MAX_COUNT_RANDOM_ITEM = 10;
 const getRandomPosts = (array) => arrayRandomElements(array).slice(0, MAX_COUNT_RANDOM_ITEM);
 
+//чистим страницу от миниатурных постов
 const removeMinPictures = () => {
   document.querySelectorAll('.picture').forEach((element) => {
     element.remove();
   });
 };
 
+// функция сортировки по количеству комментариев
 const comparePosts = (postA, postB) => postB.comments.length - postA.comments.length;
-
+// сортируем массив по самым осуждаемым
 const sortByPopular = (array) => array.slice().sort(comparePosts);
 
+//функция переключени и отрисовки постов
 const sortMinPictures = (array) => {
   minPicturesFilter.addEventListener('click', (evt) => {
     if (evt.target.classList.contains('img-filters__button') && !evt.target.classList.contains('img-filters__button--active')) {
