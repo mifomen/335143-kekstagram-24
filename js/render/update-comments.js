@@ -33,9 +33,9 @@ const updateComments = (dataArray) => {
       loadCommentsBtn.addEventListener('click', () => {
 
         renderCommentsCount+=COMMENTS_STEP;
-        if (renderCommentsCount <= obj.comments.length) {
-          commentsLoadBtn.textContent=`${renderCommentsCount} из ${obj.comments.length}`;
-          createComments(obj,renderCommentsCount);
+        if (obj.comments.length - renderCommentsCount < COMMENTS_STEP) {
+          commentsLoadBtn.textContent=`${obj.comments.length} из ${obj.comments.length}`;
+          createComments(obj,obj.comments.length);
           loadCommentsBtn.classList.remove('hidden');
         } else {
           loadCommentsBtn.classList.add('hidden');

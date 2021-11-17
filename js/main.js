@@ -1,7 +1,6 @@
 import './render/render-upload-image.js';
 import './scale-post.js';
 import './render/render-slider.js';
-
 import {closeUserModal} from './utils.js';
 import {getData} from './api.js';
 import {renderPicture} from './render/render-picture.js';
