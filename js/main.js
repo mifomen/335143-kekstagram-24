@@ -11,10 +11,6 @@ import {renderComments,onEscapePress} from './render/render-random-coments.js';
 
 getData((photoPosts) => {
   renderPicture(photoPosts);
-  //eslint-disable-next-line
-  console.log(photoPosts)
-  // renderRandomComments(photoPosts.comments,0)
-
   const bigPicture = document.querySelector('.big-picture');
   const posts = document.querySelectorAll('.picture__img');
   bigPicture.classList.add('hidden');
@@ -40,13 +36,8 @@ getData((photoPosts) => {
       });
 
       renderComments(obj,renderCommentsCount);
-      //eslint-disable-next-line
-      console.log(obj.comments)
-
       const commentsLoadBtn = document.querySelector('.social__comment-count');
-
       const loadCommentsBtn = document.querySelector('.comments-loader');
-
       loadCommentsBtn.addEventListener('click', () => {
 
         renderCommentsCount+=5;

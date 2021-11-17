@@ -12,7 +12,7 @@ const renderComments = function (commentsArray,count) {
   const commentFragment = document.createDocumentFragment();
   commentsList.innerHTML='';
 
-  const createComments = commentsArray.comments.slice(0,count+4);
+  const createComments = commentsArray.comments.slice(0,count);
   createComments.forEach((createComment) => {
     const copyComment = commentElement.cloneNode(true);
     copyComment.querySelector('.social__picture').src=createComment.avatar;
