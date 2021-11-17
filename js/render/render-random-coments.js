@@ -1,9 +1,10 @@
-import {getRandomArrayElement} from '../utils/get-random-array-element.js';
-import {DESCRIPTIONS,MIN_LIKES,MAX_LIKES,POSTS_COUNT} from '../data/consts.js';
+// import {getRandomArrayElement} from '../utils/get-random-array-element.js';
+import {MIN_LIKES,MAX_LIKES} from '../data/consts.js';
 import {getRandomPositiveInteger} from '../utils/get-random-positive-integer.js';
-import {getRandomComments} from '../utils/get-random-comments.js';
-import {getData} from '../utils/api.js';
+// import {getRandomComments} from '../utils/get-random-comments.js';
+// import {getData} from '../utils/api.js';
 
+// let renderCommentsCount = 5;
 
 const renderComments = function (commentsArray,count) {
   const commentsList = document.querySelector('.social__comments');
@@ -11,7 +12,7 @@ const renderComments = function (commentsArray,count) {
   const commentFragment = document.createDocumentFragment();
   commentsList.innerHTML='';
 
-  const createComments = commentsArray.comments.slice(0,count+5);
+  const createComments = commentsArray.comments.slice(0,count+4);
   createComments.forEach((createComment) => {
     const copyComment = commentElement.cloneNode(true);
     copyComment.querySelector('.social__picture').src=createComment.avatar;
@@ -21,11 +22,11 @@ const renderComments = function (commentsArray,count) {
   });
   commentsList.appendChild(commentFragment);
   const imgDescription = document.querySelector('.social__caption');
-  imgDescription.textContent =commentsArray.description;
+  imgDescription.textContent = commentsArray.description;
 
 };
 
-const commentCount = document.querySelector('.social__comment-count');
+// const commentCount = document.querySelector('.social__comment-count');
 // if (countRenderComment >= randomComments.length) {
 //   commentCount.textContent=`${randomComments.length} из ${randomComments.length}`;
 // } else {
@@ -33,9 +34,9 @@ const commentCount = document.querySelector('.social__comment-count');
 // }
 
 
-const commentsLoader = document.querySelector('.comments-loader');
+// const commentsLoader = document.querySelector('.comments-loader');
 
-const RENDER_COUNT = 5;
+// const RENDER_COUNT = 5;
 
 // if (randomComments.length <= countRenderComment) {
 //   commentsLoader.classList.add('hidden');
@@ -101,5 +102,4 @@ document.addEventListener('keydown', onEscapePress);
 
 
 export {renderComments};
-
 

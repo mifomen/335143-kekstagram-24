@@ -7,7 +7,7 @@ const renderPicture = function (renderGetPosts)  {
   const pictureTemplate = document.querySelector('#picture');
   const pictureFragment = document.createDocumentFragment();
 
-  renderGetPosts.forEach((photoPost,index) => {
+  renderGetPosts.forEach((photoPost) => {
     const photoElement = pictureTemplate.content.cloneNode(true);
     photoElement.querySelector('.picture__img').src = photoPost.url;
     photoElement.querySelector('.picture__comments').textContent = photoPost.comments.length;
@@ -19,4 +19,4 @@ const renderPicture = function (renderGetPosts)  {
   picturesList.appendChild(pictureFragment);
 };
 
-export {renderPicture}
+export {renderPicture};
