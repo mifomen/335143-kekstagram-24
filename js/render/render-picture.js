@@ -1,4 +1,3 @@
-
 const renderPicture = function (renderGetPosts)  {
   const picturesList = document.querySelector('.pictures');
   const pictureTemplate = document.querySelector('#picture');

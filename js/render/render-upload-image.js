@@ -83,7 +83,7 @@ const checkHashtagEvery = (item) => {
   }
 };
 
-const checkDuplicates = function(arrItem) {
+const checkDuplicates = (arrItem) => {
   const set = new Set(arrItem);
   return set.size === arrItem.length;
 };

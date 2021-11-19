@@ -2,6 +2,8 @@ import { renderPicture } from './render-picture.js';
 import { arrayRandomElements,debounce} from '../utils.js';
 import {updateComments} from './update-comments.js';
 
+const MAX_COUNT_RANDOM_ITEM = 10;
+
 const minPicturesFilter = document.querySelector('.img-filters');
 
 //показываем кнопки для фильтрации
@@ -10,7 +12,6 @@ const showFilters = () => {
 };
 
 //создаем массив случайных постов
-const MAX_COUNT_RANDOM_ITEM = 10;
 const getRandomPosts = (array) => arrayRandomElements(array).slice(0, MAX_COUNT_RANDOM_ITEM);
 
 //чистим страницу от миниатурных постов

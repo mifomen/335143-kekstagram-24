@@ -1,3 +1,16 @@
+const GRAYSCALE_FILTER = 'grayscale';
+const SEPIA_FILTER = 'sepia';
+const INVERT_FILTER = 'invert';
+const PHOBOS_FILTER = 'blur';
+const BRIGHTNESS_FILTER = 'brightness';
+const settingOfSlider = {
+  chrome: {range: {min: 0,max: 1},start: 1,step: 0.1},
+  sepia: {range: {min: 0,max: 1},start: 1,step: 0.1},
+  marvin: {range: {min: 0,max: 100},start: 100,step: 1},
+  phobos: {range: {min: 0,max: 3},start: 3,step: 0.1},
+  heat: {range: {min: 0,max: 3},start: 3,step: 0.1},
+};
+
 const sliderElement = document.querySelector('.effect-level__slider');
 const valueElement = document.querySelector('.effect-level__value');
 const photoPreview = document.querySelector('.img-upload__preview img');
@@ -10,55 +23,6 @@ const btnEffectSepia= document.querySelector('#effect-sepia');
 const btnEffectMarvin= document.querySelector('#effect-marvin');
 const btnEffectPhobos= document.querySelector('#effect-phobos');
 const btnEffectHeat= document.querySelector('#effect-heat');
-
-const GRAYSCALE_FILTER = 'grayscale';
-const SEPIA_FILTER = 'sepia';
-const INVERT_FILTER = 'invert';
-const PHOBOS_FILTER = 'blur';
-const BRIGHTNESS_FILTER = 'brightness';
-
-const settingOfSlider = {
-  chrome: {
-    range: {
-      min: 0,
-      max: 1,
-    },
-    start: 1,
-    step: 0.1,
-  },
-  sepia: {
-    range: {
-      min: 0,
-      max: 1,
-    },
-    start: 1,
-    step: 0.1,
-  },
-  marvin: {
-    range: {
-      min: 0,
-      max: 100,
-    },
-    start: 100,
-    step: 1,
-  },
-  phobos: {
-    range: {
-      min: 0,
-      max: 3,
-    },
-    start: 3,
-    step: 0.1,
-  },
-  heat: {
-    range: {
-      min: 0,
-      max: 3,
-    },
-    start: 3,
-    step: 0.1,
-  },
-};
 
 const createSlide = (element) => {
   noUiSlider.create(element , {
@@ -90,7 +54,6 @@ const addClassOnItem = (item,itemClass) => {
 };
 
 createSlide(sliderElement);
-
 
 if (!sliderLine.classList.contains('hidden')) {
   sliderLine.classList.add('hidden');
@@ -142,22 +105,18 @@ for (const effectBtn of allEffectsBtns) {
 
 sliderElement.noUiSlider.on('update', (values, handle) => {
   valueElement.value = values[handle];
-
   if (btnEffectChrome.checked) {
     photoPreview.style.filter=`${GRAYSCALE_FILTER}(${values[handle]})`;
   }
   if (btnEffectSepia.checked){
     photoPreview.style.filter=`${SEPIA_FILTER}(${valueElement.value})`;
   }
-
   if (btnEffectMarvin.checked){
     photoPreview.style.filter=`${INVERT_FILTER}(${valueElement.value}%)`;
   }
-
   if (btnEffectPhobos.checked){
     photoPreview.style.filter=`${PHOBOS_FILTER}(${valueElement.value}px)`;
   }
-
   if (btnEffectHeat.checked){
     photoPreview.style.filter=`${BRIGHTNESS_FILTER}(${valueElement.value})`;
   }
