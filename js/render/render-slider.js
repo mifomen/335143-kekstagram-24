@@ -57,8 +57,8 @@ if (!sliderLineElement.classList.contains('hidden')) {
   sliderLineElement.classList.add('hidden');
 }
 
-for (const effectBtn of allEffectsBtnsElements) {
-  effectBtn.addEventListener('click', (evt) => {
+for (const effectBtnElement of allEffectsBtnsElements) {
+  effectBtnElement.addEventListener('click', (evt) => {
 
     if (!sliderLineElement.classList.contains('hidden')) {
       sliderLineElement.classList.add('hidden');
