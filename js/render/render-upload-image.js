@@ -1,4 +1,4 @@
-import {resizeInput,previewImgElement} from '../scale-post.js';
+import {resizeInputElement,previewImgElement} from '../scale-post.js';
 import {showError,showSucces} from '../utils.js';
 import {sendData} from '../api.js';
 
@@ -9,7 +9,7 @@ const MAX_HASHTAG_COUNT = 5;
 
 const body = document.body;
 const uploadForm = document.querySelector('#upload-select-image');
-const onUploadCancelBtnClick = document.querySelector('#upload-cancel');
+const uploadCancelBtn = document.querySelector('#upload-cancel');
 const uploadImageOverlay = document.querySelector('.img-upload__overlay');
 const templateHashtag = /^#[A-Za-zА-Яа-яЁё0-9]{1,19}$/;
 const onHashTagInput = document.querySelector('.text__hashtags');
@@ -24,14 +24,14 @@ const onEscapePress = (evt) => {
   if (evt.code === 'Escape' && !uploadImageOverlay.classList.contains('hidden') && onHashTagInput !==document.activeElement && inputDescription !== document.activeElement) {
     uploadImageOverlay.classList.add('hidden');
 
-    onHideOverlayClick(); //не знаю как его точно надо назвать
+    onUploadCancelBtnClick(); //не знаю как его точно надо назвать
   }
 };
 
 
-function onHideOverlayClick() {
+function onUploadCancelBtnClick() {
   uploadImageOverlay.classList.add('hidden');
-  onUploadCancelBtnClick.removeEventListener('click',onHideOverlayClick);
+  uploadCancelBtn.removeEventListener('click',onUploadCancelBtnClick);
   document.removeEventListener('keydown', onEscapePress);
   uploadForm.reset();
   if (body.classList.contains('modal-open')) {
@@ -53,7 +53,7 @@ const onLoadImage = () => {
   });
 
   reader.readAsDataURL(file);
-  onUploadCancelBtnClick.addEventListener('click',onHideOverlayClick);
+  uploadCancelBtn.addEventListener('click',onUploadCancelBtnClick);
   document.addEventListener('keydown', onEscapePress);
 };
 
@@ -129,7 +129,7 @@ onHashTagInput.addEventListener('input', () => {
 
 
 onFileUpload.addEventListener('click', () => {
-  resizeInput.value = '100%';
+  resizeInputElement.value = '100%';
   previewImgElement.style.transform = 'scale(1)';
   previewImgElement.style.filter='';
   if (!sliderLine.classList.contains('hidden')) {

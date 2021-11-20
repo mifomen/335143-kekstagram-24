@@ -1,8 +1,8 @@
 const createComments = (commentsArray,count)  =>{
-  const commentsList = document.querySelector('.social__comments');
+  const commentsListElement = document.querySelector('.social__comments');
   const commentElement = document.querySelector('.social__comment');
   const commentFragment = document.createDocumentFragment();
-  commentsList.innerHTML='';
+  commentsListElement.innerHTML='';
 
   const comments = commentsArray.comments.slice(0,count);
   comments.forEach((createComment) => {
@@ -13,12 +13,12 @@ const createComments = (commentsArray,count)  =>{
 
     commentFragment.appendChild(copyCommentElement);
   });
-  commentsList.appendChild(commentFragment);
+  commentsListElement.appendChild(commentFragment);
 
-  const imgDescription = document.querySelector('.social__caption');
+  const imgDescriptionElement = document.querySelector('.social__caption');
   const likesCountElement =  document.querySelector('.likes-count');
 
-  imgDescription.textContent = commentsArray.description;
+  imgDescriptionElement.textContent = commentsArray.description;
   likesCountElement.textContent = commentsArray.likes;
 
 };
@@ -26,10 +26,10 @@ const createComments = (commentsArray,count)  =>{
 const body = document.body;
 body.classList.add('modal-open');
 
-const bigPicture = document.querySelector('.big-picture');
+const bigPictureElement = document.querySelector('.big-picture');
 
 const onEscapePress = (evt) => {
-  if (evt.code === 'Escape' && !bigPicture.classList.contains('hidden')) {
+  if (evt.code === 'Escape' && !bigPictureElement.classList.contains('hidden')) {
     hidePictureOverlay ();
   }
 };
@@ -47,8 +47,8 @@ const onCloseOverlayBtnClick = () => {
   hidePictureOverlay ();
 };
 
-const closePictureButton = document.querySelector('#picture-cancel');
-closePictureButton.addEventListener('click', onCloseOverlayBtnClick);
+const closePictureButtonElement = document.querySelector('#picture-cancel');
+closePictureButtonElement.addEventListener('click', onCloseOverlayBtnClick);
 
 document.addEventListener('keydown', onEscapePress);
 
