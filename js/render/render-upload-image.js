@@ -23,13 +23,10 @@ const sliderLineElement = document.querySelector('.effect-level');
 const onEscapePress = (evt) => {
   if (evt.code === 'Escape' && !uploadImageOverlayElement.classList.contains('hidden') && onHashTagInputElement !==document.activeElement && inputDescriptionElement !== document.activeElement) {
     uploadImageOverlayElement.classList.add('hidden');
-
-    onUploadCancelBtnClick();
+    closeForm();
   }
 };
-
-
-function onUploadCancelBtnClick() {
+function closeForm() {
   uploadImageOverlayElement.classList.add('hidden');
   uploadCancelBtnElement.removeEventListener('click',onUploadCancelBtnClick);
   document.removeEventListener('keydown', onEscapePress);
@@ -38,6 +35,9 @@ function onUploadCancelBtnClick() {
     body.classList.remove('modal-open');
   }
 }
+
+
+function onUploadCancelBtnClick() {closeForm();}
 
 const onFormLoadImage = () => {
   uploadImageOverlayElement.classList.remove('hidden');

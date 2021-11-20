@@ -5,13 +5,13 @@ const COMMENTS_STEP = 5;
 const updateComments = (dataArray) => {
 
   const bigPictureElement = document.querySelector('.big-picture');
-  const allPosts = document.querySelectorAll('.picture__img');
+  const postsElements = document.querySelectorAll('.picture__img');
   bigPictureElement.classList.add('hidden');
   bigPictureElement.classList.remove('overlay');
   document.body.classList.remove('modal-open');
 
-  for (const postElement of allPostsElements) {
-    post.addEventListener('click', (evt) => {
+  for (const postElement of postsElements) {
+    postElement.addEventListener('click', (evt) => {
 
       evt.preventDefault();
       bigPictureElement.querySelector('.big-picture__img img').src = evt.target.src;
@@ -29,34 +29,34 @@ const updateComments = (dataArray) => {
       });
 
       createComments(obj,renderCommentsCount);
-      const commentsLoadBtnElementElement = document.querySelector('.social__comment-count');
-      const loadCommentsBtn = document.querySelector('.comments-loader');
+      const commentsLoadBtnElement = document.querySelector('.social__comment-count');
+      const loadCommentsBtnElement = document.querySelector('.comments-loader');
 
-      loadCommentsBtn.addEventListener('click', () => {
+      loadCommentsBtnElement.addEventListener('click', () => {
         renderCommentsCount+=COMMENTS_STEP;
 
         if (obj.comments.length - renderCommentsCount < COMMENTS_STEP) {
           commentsLoadBtnElement.textContent=`${obj.comments.length} из ${obj.comments.length}`;
           createComments(obj,obj.comments.length);
-          loadCommentsBtn.classList.add('hidden');
+          loadCommentsBtnElement.classList.add('hidden');
           return;
         }
         if (renderCommentsCount <= obj.comments.length) {
           commentsLoadBtnElement.textContent=`${renderCommentsCount} из ${obj.comments.length}`;
           createComments(obj,renderCommentsCount);
-          loadCommentsBtn.classList.remove('hidden');
+          loadCommentsBtnElement.classList.remove('hidden');
         } else {
-          loadCommentsBtn.classList.add('hidden');
+          loadCommentsBtnElement.classList.add('hidden');
           commentsLoadBtnElement.textContent=`${obj.comments.length} из ${obj.comments.length}`;
         }
       });
 
       if (renderCommentsCount <= obj.comments.length ) {
         commentsLoadBtnElement.textContent=`${renderCommentsCount} из ${obj.comments.length}`;
-        loadCommentsBtn.classList.remove('hidden');
+        loadCommentsBtnElement.classList.remove('hidden');
       } else {
         commentsLoadBtnElement.textContent=`${obj.comments.length} из ${obj.comments.length}`;
-        loadCommentsBtn.classList.add('hidden');
+        loadCommentsBtnElement.classList.add('hidden');
       }
     });
   }
