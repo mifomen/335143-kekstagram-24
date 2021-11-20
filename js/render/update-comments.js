@@ -5,13 +5,13 @@ const COMMENTS_STEP = 5;
 const updateComments = (dataArray) => {
 
   const bigPicture = document.querySelector('.big-picture');
-  const posts = document.querySelectorAll('.picture__img');
+  const allPosts = document.querySelectorAll('.picture__img');
   bigPicture.classList.add('hidden');
   bigPicture.classList.remove('overlay');
   document.body.classList.remove('modal-open');
 
-  for (const post of posts) {
-    post.addEventListener('click', (evt) => {
+  for (const onPostClick of allPosts) {
+    onPostClick.addEventListener('click', (evt) => {
 
       evt.preventDefault();
       bigPicture.querySelector('.big-picture__img img').src = evt.target.src;

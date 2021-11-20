@@ -9,19 +9,19 @@ const MAX_HASHTAG_COUNT = 5;
 
 const body = document.body;
 const uploadForm = document.querySelector('#upload-select-image');
-const uploadCancelBtn = document.querySelector('#upload-cancel');
+const onUploadCancelBtnClick = document.querySelector('#upload-cancel');
 const uploadImageOverlay = document.querySelector('.img-upload__overlay');
 const templateHashtag = /^#[A-Za-zА-Яа-яЁё0-9]{1,19}$/;
-const inputHashtag = document.querySelector('.text__hashtags');
+const onHashTagInput = document.querySelector('.text__hashtags');
 const inputDescription = document.querySelector('.text__description');
 const photoPreview = document.querySelector('.img-upload__preview img');
 
-const uploadFile = document.querySelector('#upload-file');
+const onFileUpload = document.querySelector('#upload-file');
 const effectList = document.querySelectorAll('.effects__preview');
 const sliderLine = document.querySelector('.effect-level');
 
 const onEscapePress = (evt) => {
-  if (evt.code === 'Escape' && !uploadImageOverlay.classList.contains('hidden') && inputHashtag !==document.activeElement && inputDescription !== document.activeElement) {
+  if (evt.code === 'Escape' && !uploadImageOverlay.classList.contains('hidden') && onHashTagInput !==document.activeElement && inputDescription !== document.activeElement) {
     uploadImageOverlay.classList.add('hidden');
 
     hideUploadOverlay();
@@ -31,7 +31,7 @@ const onEscapePress = (evt) => {
 
 function hideUploadOverlay() {
   uploadImageOverlay.classList.add('hidden');
-  uploadCancelBtn.removeEventListener('click',hideUploadOverlay);
+  onUploadCancelBtnClick.removeEventListener('click',hideUploadOverlay);
   document.removeEventListener('keydown', onEscapePress);
   uploadForm.reset();
   if (body.classList.contains('modal-open')) {
@@ -42,18 +42,18 @@ function hideUploadOverlay() {
 const onLoadImage = () => {
   uploadImageOverlay.classList.remove('hidden');
   body.classList.add('modal-open');
-  const file = uploadFile.files[0];
-  const reader = new FileReader();
-  reader.addEventListener('load', () => {
-    photoPreview.src = reader.result;
+  const file = onFileUpload.files[0];
+  const onReaderLoad = new FileReader();
+  onReaderLoad.addEventListener('load', () => {
+    photoPreview.src = onReaderLoad.result;
 
     [].forEach.call(effectList, (effectPreview) => {
-      effectPreview.style.backgroundImage = `url('${reader.result}')`;
+      effectPreview.style.backgroundImage = `url('${onReaderLoad.result}')`;
     });
   });
 
-  reader.readAsDataURL(file);
-  uploadCancelBtn.addEventListener('click',hideUploadOverlay);
+  onReaderLoad.readAsDataURL(file);
+  onUploadCancelBtnClick.addEventListener('click',hideUploadOverlay);
   document.addEventListener('keydown', onEscapePress);
 };
 
@@ -88,46 +88,46 @@ const checkDuplicates = (arrItem) => {
   return set.size === arrItem.length;
 };
 
-inputHashtag.addEventListener('input', () => {
-  const valueLength = inputHashtag.value.length;
+onHashTagInput.addEventListener('input', () => {
+  const valueLength = onHashTagInput.value.length;
 
   switch (true) {
-    case inputHashtag.value[0] !== '#':
-      inputHashtag.setCustomValidity('ХэшТег должен начинаться с #');
+    case onHashTagInput.value[0] !== '#':
+      onHashTagInput.setCustomValidity('ХэшТег должен начинаться с #');
       break;
 
-    case templateHashtag.test(inputHashtag.value) && valueLength < MIN_HASHTAG_LENGTH:
-      inputHashtag.setCustomValidity(`Еще ${ MIN_HASHTAG_LENGTH - valueLength} символа`);
+    case templateHashtag.test(onHashTagInput.value) && valueLength < MIN_HASHTAG_LENGTH:
+      onHashTagInput.setCustomValidity(`Еще ${ MIN_HASHTAG_LENGTH - valueLength} символа`);
       break;
 
-    case (templateHashtag.test(inputHashtag.value) && valueLength > MAX_HASHTAG_LENGTH):
-      inputHashtag.setCustomValidity(`Набрали на ${ valueLength - MAX_HASHTAG_LENGTH } лишних символов`);
+    case (templateHashtag.test(onHashTagInput.value) && valueLength > MAX_HASHTAG_LENGTH):
+      onHashTagInput.setCustomValidity(`Набрали на ${ valueLength - MAX_HASHTAG_LENGTH } лишних символов`);
       break;
 
-    case !checkDuplicates(valueToArray(inputHashtag)) === true:
-      inputHashtag.setCustomValidity('Есть повторяющие хэштеги, так нельзя');
+    case !checkDuplicates(valueToArray(onHashTagInput)) === true:
+      onHashTagInput.setCustomValidity('Есть повторяющие хэштеги, так нельзя');
       break;
 
-    case inputHashtag.value[inputHashtag.value.length-1] === ' ' && valueToArray(inputHashtag).length >= MAX_HASHTAG_COUNT:
-      inputHashtag.value = inputHashtag.value.trim();
+    case onHashTagInput.value[onHashTagInput.value.length-1] === ' ' && valueToArray(onHashTagInput).length >= MAX_HASHTAG_COUNT:
+      onHashTagInput.value = onHashTagInput.value.trim();
       break;
 
-    case !checkHashtagCounts(inputHashtag) === true && valueToArray(inputHashtag).length >= MIN_HASHTAG_LENGTH:
-      inputHashtag.setCustomValidity('У вас много хэштегов, максимум 5');
+    case !checkHashtagCounts(onHashTagInput) === true && valueToArray(onHashTagInput).length >= MIN_HASHTAG_LENGTH:
+      onHashTagInput.setCustomValidity('У вас много хэштегов, максимум 5');
       break;
 
-    case !checkHashtagEvery(inputHashtag) === true:
-      inputHashtag.setCustomValidity('У вас неправильно набран хэштег');
+    case !checkHashtagEvery(onHashTagInput) === true:
+      onHashTagInput.setCustomValidity('У вас неправильно набран хэштег');
       break;
 
-    default: inputHashtag.setCustomValidity('');
-      inputHashtag.setCustomValidity('');
+    default: onHashTagInput.setCustomValidity('');
+      onHashTagInput.setCustomValidity('');
   }
-  inputHashtag.reportValidity();
+  onHashTagInput.reportValidity();
 });
 
 
-uploadFile.addEventListener('click', () => {
+onFileUpload.addEventListener('click', () => {
   resizeInput.value = '100%';
   preview.style.transform = 'scale(1)';
   preview.style.filter='';
