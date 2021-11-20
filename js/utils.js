@@ -1,8 +1,8 @@
 import {onEscapePress} from './render/create-comments.js';
 
 const userModalElement = document.querySelector('.img-upload__overlay');
-const uploadFormOverlay = document.querySelector('.img-upload__overlay');
-const uplaodForm = document.querySelector('#upload-select-image');
+const uploadFormOverlayElement = document.querySelector('.img-upload__overlay');
+const uplaodFormElement = document.querySelector('#upload-select-image');
 
 const closeUserModal = () => {
   userModalElement.classList.add('hidden');
@@ -14,11 +14,11 @@ const showError =() => {
   const copyPopup = succesPopup.content.cloneNode(true);
   const popupFragment = document.createDocumentFragment();
   popupFragment.appendChild(copyPopup);
-  uploadFormOverlay.classList.add('hidden');
+  uploadFormOverlayElement.classList.add('hidden');
   popupFragment.querySelector('.error__button').addEventListener('click', (evt) => {
     evt.preventDefault();
     document.body.removeChild(document.querySelector('.error'));
-    uplaodForm.reset();
+    uplaodFormElement.reset();
   });
   document.body.appendChild(popupFragment);
 };
@@ -28,10 +28,10 @@ const showSucces = () => {
   const copyPopup = succesPopup.content.cloneNode(true);
   const popupFragment = document.createDocumentFragment();
   popupFragment.appendChild(copyPopup);
-  uploadFormOverlay.classList.add('hidden');
+  uploadFormOverlayElement.classList.add('hidden');
   popupFragment.querySelector('.success__button').addEventListener('click', (evt) => {
     evt.preventDefault();
-    uplaodForm.reset();
+    uplaodFormElement.reset();
     document.body.removeChild(document.querySelector('.success'));
 
   });

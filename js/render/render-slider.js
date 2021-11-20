@@ -34,13 +34,13 @@ const createSlide = (element) => {
     },
     step: settingOfSlider.chrome.step,
     format: {
-      to: (value) => {
+      to: function (value) { // https://prnt.sc/20611yx тту д5 я не понимаю что от меня хотят
         if (Number.isInteger(value)) {
           return value.toFixed(0);
         }
         return value.toFixed(1);
       },
-      from: function (value) {
+      from: function (value) { // https://prnt.sc/20611yx тту д5 я не понимаю что от меня хотят
         return parseFloat(value);
       },
     },
