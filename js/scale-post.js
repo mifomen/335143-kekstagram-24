@@ -1,14 +1,13 @@
+const MAX_SIZE = 100;
+const MIN_SIZE = 25;
+const STEP = 25;
+const DEFAULT_SCALE = 100;
+const DEFAULT_PARSEINT = 10;
+
 const preview = document.querySelector('.img-upload__preview img');
 const resizeInput = document.querySelector('.scale__control--value');
 const btnResizeMinus = document.querySelector('.scale__control--smaller');
 const btnResizePlus = document.querySelector('.scale__control--bigger');
-
-const MAX_SIZE = 100;
-const MIN_SIZE = 25;
-const STEP = 25;
-
-const DEFAULT_SCALE = 100;
-const DEFAULT_PARSEINT = 10;
 
 resizeInput.value = `${DEFAULT_SCALE}%`;
 

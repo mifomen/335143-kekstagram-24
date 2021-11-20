@@ -1,12 +1,13 @@
+import {onEscapePress} from './render/create-comments.js';
+
 const userModalElement = document.querySelector('.img-upload__overlay');
 const uploadFormOverlay = document.querySelector('.img-upload__overlay');
 const uplaodForm = document.querySelector('#upload-select-image');
-import {onEscapePress} from './render/create-comments.js';
 
-function closeUserModal () {
+const closeUserModal = () => {
   userModalElement.classList.add('hidden');
   document.removeEventListener('keydown', onEscapePress);
-}
+};
 
 const showError =() => {
   const succesPopup = document.querySelector('#error');
@@ -38,20 +39,15 @@ const showSucces = () => {
   document.body.appendChild(popupFragment);
 };
 
-function debounce (callback, timeoutDelay = 500) {
+const debounce = (callback, timeoutDelay = 500) =>{
   let timeoutId;
 
   return (...rest) => {
     clearTimeout(timeoutId);
     timeoutId = setTimeout(() => callback.apply(this, rest), timeoutDelay);
   };
-}
+};
 
 const arrayRandomElements = (array) => array.slice().sort(() => Math.random() - 0.5);
 
-function checkStringLength (string, length) {
-  return string.length <= length;
-}
-
-export {checkStringLength,closeUserModal,showError,showSucces,arrayRandomElements,debounce};
-
+export {closeUserModal,showError,showSucces,arrayRandomElements,debounce};

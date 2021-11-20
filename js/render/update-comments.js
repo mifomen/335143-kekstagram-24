@@ -1,4 +1,5 @@
 import {createComments,onEscapePress} from './create-comments.js';
+
 const COMMENTS_STEP = 5;
 
 const updateComments = (dataArray) => {
@@ -8,7 +9,6 @@ const updateComments = (dataArray) => {
   bigPicture.classList.add('hidden');
   bigPicture.classList.remove('overlay');
   document.body.classList.remove('modal-open');
-
 
   for (const post of posts) {
     post.addEventListener('click', (evt) => {
@@ -31,9 +31,10 @@ const updateComments = (dataArray) => {
       createComments(obj,renderCommentsCount);
       const commentsLoadBtn = document.querySelector('.social__comment-count');
       const loadCommentsBtn = document.querySelector('.comments-loader');
-      loadCommentsBtn.addEventListener('click', () => {
 
+      loadCommentsBtn.addEventListener('click', () => {
         renderCommentsCount+=COMMENTS_STEP;
+
         if (obj.comments.length - renderCommentsCount < COMMENTS_STEP) {
           commentsLoadBtn.textContent=`${obj.comments.length} из ${obj.comments.length}`;
           createComments(obj,obj.comments.length);
@@ -57,7 +58,6 @@ const updateComments = (dataArray) => {
         commentsLoadBtn.textContent=`${obj.comments.length} из ${obj.comments.length}`;
         loadCommentsBtn.classList.add('hidden');
       }
-
     });
   }
 };
