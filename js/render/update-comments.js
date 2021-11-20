@@ -10,8 +10,8 @@ const updateComments = (dataArray) => {
   bigPicture.classList.remove('overlay');
   document.body.classList.remove('modal-open');
 
-  for (const onPostClick of allPosts) {
-    onPostClick.addEventListener('click', (evt) => {
+  for (const post of allPosts) {
+    post.addEventListener('click', (evt) => {
 
       evt.preventDefault();
       bigPicture.querySelector('.big-picture__img img').src = evt.target.src;

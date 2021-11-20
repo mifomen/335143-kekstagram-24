@@ -12,31 +12,31 @@ const closeUserModal = () => {
 const showError =() => {
   const succesPopup = document.querySelector('#error');
   const copyPopup = succesPopup.content.cloneNode(true);
-  const onPopupFragmentClick = document.createDocumentFragment();
-  onPopupFragmentClick.appendChild(copyPopup);
+  const popupFragment = document.createDocumentFragment();
+  popupFragment.appendChild(copyPopup);
   uploadFormOverlay.classList.add('hidden');
-  onPopupFragmentClick.querySelector('.error__button').addEventListener('click', (evt) => {
+  popupFragment.querySelector('.error__button').addEventListener('click', (evt) => {
     evt.preventDefault();
     document.body.removeChild(document.querySelector('.error'));
     uplaodForm.reset();
   });
-  document.body.appendChild(onPopupFragmentClick);
+  document.body.appendChild(popupFragment);
 };
 
 
 const showSucces = () => {
   const succesPopup = document.querySelector('#success');
   const copyPopup = succesPopup.content.cloneNode(true);
-  const onPopupFragmentClick = document.createDocumentFragment();
-  onPopupFragmentClick.appendChild(copyPopup);
+  const popupFragment = document.createDocumentFragment();
+  popupFragment.appendChild(copyPopup);
   uploadFormOverlay.classList.add('hidden');
-  onPopupFragmentClick.querySelector('.success__button').addEventListener('click', (evt) => {
+  popupFragment.querySelector('.success__button').addEventListener('click', (evt) => {
     evt.preventDefault();
     uplaodForm.reset();
     document.body.removeChild(document.querySelector('.success'));
 
   });
-  document.body.appendChild(onPopupFragmentClick);
+  document.body.appendChild(popupFragment);
 };
 
 const debounce = (callback, timeoutDelay = 500) =>{
