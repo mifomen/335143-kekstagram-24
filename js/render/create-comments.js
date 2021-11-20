@@ -6,19 +6,20 @@ const createComments = (commentsArray,count)  =>{
 
   const comments = commentsArray.comments.slice(0,count);
   comments.forEach((createComment) => {
-    const copyComment = commentElement.cloneNode(true);
-    copyComment.querySelector('.social__picture').src = createComment.avatar;
-    copyComment.querySelector('.social__picture').alt = createComment.name;
-    copyComment.querySelector('.social__text').textContent = createComment.message;
+    const copyCommentElement = commentElement.cloneNode(true);
+    copyCommentElement.querySelector('.social__picture').src = createComment.avatar;
+    copyCommentElement.querySelector('.social__picture').alt = createComment.name;
+    copyCommentElement.querySelector('.social__text').textContent = createComment.message;
 
-    commentFragment.appendChild(copyComment);
+    commentFragment.appendChild(copyCommentElement);
   });
   commentsList.appendChild(commentFragment);
 
   const imgDescription = document.querySelector('.social__caption');
-  const likeCounts =  document.querySelector('.likes-count');
+  const likesCountElement =  document.querySelector('.likes-count');
+
   imgDescription.textContent = commentsArray.description;
-  likeCounts.textContent = commentsArray.likes;
+  likesCountElement.textContent = commentsArray.likes;
 
 };
 
@@ -29,11 +30,11 @@ const bigPicture = document.querySelector('.big-picture');
 
 const onEscapePress = (evt) => {
   if (evt.code === 'Escape' && !bigPicture.classList.contains('hidden')) {
-    hidePicture ();
+    hidePictureOverlay ();
   }
 };
 
-function hidePicture() {
+function hidePictureOverlay() {
   document.querySelector('.big-picture').classList.add('hidden');
   document.querySelector('.big-picture').classList.remove('overlay');
   if (body.classList.contains('modal-open')) {
@@ -43,7 +44,7 @@ function hidePicture() {
   document.removeEventListener('keydown', onEscapePress);
 }
 const onCloseOverlayBtnClick = () => {
-  hidePicture ();
+  hidePictureOverlay ();
 };
 
 const closePictureButton = document.querySelector('#picture-cancel');
@@ -51,4 +52,4 @@ closePictureButton.addEventListener('click', onCloseOverlayBtnClick);
 
 document.addEventListener('keydown', onEscapePress);
 
-export {createComments,hidePicture,onEscapePress};
+export {createComments,onEscapePress};

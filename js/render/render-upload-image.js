@@ -1,4 +1,4 @@
-import {resizeInput,preview} from '../scale-post.js';
+import {resizeInput,previewImgElement} from '../scale-post.js';
 import {showError,showSucces} from '../utils.js';
 import {sendData} from '../api.js';
 
@@ -24,14 +24,14 @@ const onEscapePress = (evt) => {
   if (evt.code === 'Escape' && !uploadImageOverlay.classList.contains('hidden') && onHashTagInput !==document.activeElement && inputDescription !== document.activeElement) {
     uploadImageOverlay.classList.add('hidden');
 
-    hideUploadOverlay();
+    onHideOverlayClick(); //не знаю как его точно надо назвать
   }
 };
 
 
-function hideUploadOverlay() {
+function onHideOverlayClick() {
   uploadImageOverlay.classList.add('hidden');
-  onUploadCancelBtnClick.removeEventListener('click',hideUploadOverlay);
+  onUploadCancelBtnClick.removeEventListener('click',onHideOverlayClick);
   document.removeEventListener('keydown', onEscapePress);
   uploadForm.reset();
   if (body.classList.contains('modal-open')) {
@@ -43,17 +43,17 @@ const onLoadImage = () => {
   uploadImageOverlay.classList.remove('hidden');
   body.classList.add('modal-open');
   const file = onFileUpload.files[0];
-  const onReaderLoad = new FileReader();
-  onReaderLoad.addEventListener('load', () => {
-    photoPreview.src = onReaderLoad.result;
+  const reader = new FileReader();
+  reader.addEventListener('load', () => {
+    photoPreview.src = reader.result;
 
     [].forEach.call(effectList, (effectPreview) => {
-      effectPreview.style.backgroundImage = `url('${onReaderLoad.result}')`;
+      effectPreview.style.backgroundImage = `url('${reader.result}')`;
     });
   });
 
-  onReaderLoad.readAsDataURL(file);
-  onUploadCancelBtnClick.addEventListener('click',hideUploadOverlay);
+  reader.readAsDataURL(file);
+  onUploadCancelBtnClick.addEventListener('click',onHideOverlayClick);
   document.addEventListener('keydown', onEscapePress);
 };
 
@@ -130,8 +130,8 @@ onHashTagInput.addEventListener('input', () => {
 
 onFileUpload.addEventListener('click', () => {
   resizeInput.value = '100%';
-  preview.style.transform = 'scale(1)';
-  preview.style.filter='';
+  previewImgElement.style.transform = 'scale(1)';
+  previewImgElement.style.filter='';
   if (!sliderLine.classList.contains('hidden')) {
     sliderLine.classList.add('hidden');
   }
