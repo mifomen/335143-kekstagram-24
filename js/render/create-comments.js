@@ -42,12 +42,12 @@ function hidePicture() {
 
   document.removeEventListener('keydown', onEscapePress);
 }
-const onCloseClick = () => {
+const onCloseOverlayBtnClick = () => {
   hidePicture ();
 };
 
 const closePictureButton = document.querySelector('#picture-cancel');
-closePictureButton.addEventListener('click', onCloseClick);
+closePictureButton.addEventListener('click', onCloseOverlayBtnClick);
 
 document.addEventListener('keydown', onEscapePress);
 
