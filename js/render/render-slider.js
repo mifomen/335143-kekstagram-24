@@ -34,7 +34,7 @@ const createSlide = (element) => {
     },
     step: settingOfSlider.chrome.step,
     format: {
-      to: function (value) {
+      to: (value) => {
         if (Number.isInteger(value)) {
           return value.toFixed(0);
         }
@@ -67,37 +67,38 @@ for (const effectBtn of allEffectsBtns) {
     }
 
     switch (evt.target) {
-      case btnEffectNone:
+      case btnEffectNone: {
         if (!sliderLine.classList.contains('hidden')) {
           sliderLine.classList.add('hidden');
         }
         photoPreview.style.filter='';
         break;
-
-      case btnEffectChrome:
+      }
+      case btnEffectChrome: {
         addClassOnItem(sliderLine,'hidden');
         sliderElement.noUiSlider.updateOptions(settingOfSlider.chrome);
         break;
-
-      case btnEffectSepia:
+      }
+      case btnEffectSepia:{
         addClassOnItem(sliderLine,'hidden');
         sliderElement.noUiSlider.updateOptions(settingOfSlider.sepia);
         break;
-
-      case btnEffectMarvin:
+      }
+      case btnEffectMarvin:{
         addClassOnItem(sliderLine,'hidden');
         sliderElement.noUiSlider.updateOptions(settingOfSlider.marvin);
         break;
-
-      case btnEffectPhobos:
+      }
+      case btnEffectPhobos:{
         addClassOnItem(sliderLine,'hidden');
         sliderElement.noUiSlider.updateOptions(settingOfSlider.phobos);
         break;
-
-      case btnEffectHeat:
+      }
+      case btnEffectHeat: {
         addClassOnItem(sliderLine,'hidden');
         sliderElement.noUiSlider.updateOptions(settingOfSlider.heat);
         break;
+      }
     }
   });
 }

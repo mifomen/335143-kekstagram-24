@@ -1,4 +1,4 @@
-const createComments = function (commentsArray,count) {
+const createComments = (commentsArray,count)  =>{
   const commentsList = document.querySelector('.social__comments');
   const commentElement = document.querySelector('.social__comment');
   const commentFragment = document.createDocumentFragment();
@@ -27,13 +27,13 @@ body.classList.add('modal-open');
 
 const bigPicture = document.querySelector('.big-picture');
 
-export const onEscapePress = (evt) => {
+const onEscapePress = (evt) => {
   if (evt.code === 'Escape' && !bigPicture.classList.contains('hidden')) {
     hidePicture ();
   }
 };
 
-export function hidePicture() {
+function hidePicture() {
   document.querySelector('.big-picture').classList.add('hidden');
   document.querySelector('.big-picture').classList.remove('overlay');
   if (body.classList.contains('modal-open')) {
@@ -51,4 +51,4 @@ closePictureButton.addEventListener('click', onCloseClick);
 
 document.addEventListener('keydown', onEscapePress);
 
-export {createComments};
+export {createComments,hidePicture,onEscapePress};

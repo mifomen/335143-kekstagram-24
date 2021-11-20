@@ -1,4 +1,4 @@
-const renderPicture = function (renderGetPosts)  {
+const renderPicture = (renderGetPosts) =>  {
   const picturesList = document.querySelector('.pictures');
   const pictureTemplate = document.querySelector('#picture');
   const pictureFragment = document.createDocumentFragment();
