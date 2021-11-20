@@ -23,7 +23,6 @@ const showError =() => {
   document.body.appendChild(popupFragment);
 };
 
-
 const showSucces = () => {
   const succesPopup = document.querySelector('#success');
   const copyPopup = succesPopup.content.cloneNode(true);

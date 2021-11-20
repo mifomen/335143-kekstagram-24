@@ -11,7 +11,6 @@ const btnResizePlus = document.querySelector('.scale__control--bigger');
 
 resizeInput.value = `${DEFAULT_SCALE}%`;
 
-
 btnResizeMinus.addEventListener('click', () => {
   if (parseInt(resizeInput.value,DEFAULT_PARSEINT) <= MIN_SIZE + STEP) {resizeInput.value = '0%';} else {
     resizeInput.value = `${parseInt(resizeInput.value,DEFAULT_PARSEINT) - STEP}%`;
