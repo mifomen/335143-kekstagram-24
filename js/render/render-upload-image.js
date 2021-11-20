@@ -92,36 +92,37 @@ onHashTagInput.addEventListener('input', () => {
   const valueLength = onHashTagInput.value.length;
 
   switch (true) {
-    case onHashTagInput.value[0] !== '#':
+    case onHashTagInput.value[0] !== '#': {
       onHashTagInput.setCustomValidity('ХэшТег должен начинаться с #');
       break;
-
-    case templateHashtag.test(onHashTagInput.value) && valueLength < MIN_HASHTAG_LENGTH:
+    }
+    case templateHashtag.test(onHashTagInput.value) && valueLength < MIN_HASHTAG_LENGTH: {
       onHashTagInput.setCustomValidity(`Еще ${ MIN_HASHTAG_LENGTH - valueLength} символа`);
       break;
-
-    case (templateHashtag.test(onHashTagInput.value) && valueLength > MAX_HASHTAG_LENGTH):
+    }
+    case (templateHashtag.test(onHashTagInput.value) && valueLength > MAX_HASHTAG_LENGTH): {
       onHashTagInput.setCustomValidity(`Набрали на ${ valueLength - MAX_HASHTAG_LENGTH } лишних символов`);
       break;
-
-    case !checkDuplicates(valueToArray(onHashTagInput)) === true:
+    }
+    case !checkDuplicates(valueToArray(onHashTagInput)) === true: {
       onHashTagInput.setCustomValidity('Есть повторяющие хэштеги, так нельзя');
       break;
-
-    case onHashTagInput.value[onHashTagInput.value.length-1] === ' ' && valueToArray(onHashTagInput).length >= MAX_HASHTAG_COUNT:
+    }
+    case onHashTagInput.value[onHashTagInput.value.length-1] === ' ' && valueToArray(onHashTagInput).length >= MAX_HASHTAG_COUNT:{
       onHashTagInput.value = onHashTagInput.value.trim();
       break;
-
-    case !checkHashtagCounts(onHashTagInput) === true && valueToArray(onHashTagInput).length >= MIN_HASHTAG_LENGTH:
+    }
+    case !checkHashtagCounts(onHashTagInput) === true && valueToArray(onHashTagInput).length >= MIN_HASHTAG_LENGTH:{
       onHashTagInput.setCustomValidity('У вас много хэштегов, максимум 5');
       break;
-
-    case !checkHashtagEvery(onHashTagInput) === true:
+    }
+    case !checkHashtagEvery(onHashTagInput) === true:{
       onHashTagInput.setCustomValidity('У вас неправильно набран хэштег');
       break;
-
-    default: onHashTagInput.setCustomValidity('');
+    }
+    default: onHashTagInput.setCustomValidity('');{
       onHashTagInput.setCustomValidity('');
+    }
   }
   onHashTagInput.reportValidity();
 });
@@ -147,4 +148,5 @@ const setUserFormSubmit = (onSuccess) => {
     );
   });
 };
+
 export {setUserFormSubmit};

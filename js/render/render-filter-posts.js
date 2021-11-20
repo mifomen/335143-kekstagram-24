@@ -37,21 +37,24 @@ const sortMinPictures = (array) => {
       const filterName = evt.target.id;
       debounce(() => {
         switch (filterName) {
-          case 'filter-default':
+          case 'filter-default':{
             removeMinPictures();
             renderPicture(array);
             updateComments(array);
             break;
-          case 'filter-random':
+          }
+          case 'filter-random': {
             removeMinPictures();
             renderPicture(getRandomPosts(array));
             updateComments(array);
             break;
-          case 'filter-discussed':
+          }
+          case 'filter-discussed': {
             removeMinPictures();
             renderPicture(sortByPopular(array));
             updateComments(array);
             break;
+          }
         }
       })(filterName);
     }

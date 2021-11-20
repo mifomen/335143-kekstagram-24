@@ -6,20 +6,19 @@ const DEFAULT_PARSEINT = 10;
 
 const preview = document.querySelector('.img-upload__preview img');
 const resizeInput = document.querySelector('.scale__control--value');
-const onResizeMinusBtnCLick = document.querySelector('.scale__control--smaller');
-const onResizePlusBtnCLick = document.querySelector('.scale__control--bigger');
+const btnResizeMinus = document.querySelector('.scale__control--smaller');
+const btnResizePlus = document.querySelector('.scale__control--bigger');
 
 resizeInput.value = `${DEFAULT_SCALE}%`;
 
-
-onResizeMinusBtnCLick.addEventListener('click', () => {
+btnResizeMinus.addEventListener('click', () => {
   if (parseInt(resizeInput.value,DEFAULT_PARSEINT) <= MIN_SIZE + STEP) {resizeInput.value = '0%';} else {
     resizeInput.value = `${parseInt(resizeInput.value,DEFAULT_PARSEINT) - STEP}%`;
   }
   preview.style.transform = `scale(0${parseInt(resizeInput.value,DEFAULT_PARSEINT) / DEFAULT_SCALE })`;
 });
 
-onResizePlusBtnCLick.addEventListener('click', () => {
+btnResizePlus.addEventListener('click', () => {
   if (parseInt(resizeInput.value,DEFAULT_PARSEINT) >= MAX_SIZE - STEP ) {resizeInput.value = `${DEFAULT_SCALE}%`;} else {
     resizeInput.value = `${parseInt(resizeInput.value,DEFAULT_PARSEINT) + STEP}%`;
   }
