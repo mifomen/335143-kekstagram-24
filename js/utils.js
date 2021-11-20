@@ -10,10 +10,10 @@ const closeUserModal = () => {
 };
 
 const showError =() => {
-  const succesPopup = document.querySelector('#error');
-  const copyPopup = succesPopup.content.cloneNode(true);
+  const errorPopupElement = document.querySelector('#error');
+  const copyPopupElement = errorPopupElement.content.cloneNode(true);
   const popupFragment = document.createDocumentFragment();
-  popupFragment.appendChild(copyPopup);
+  popupFragment.appendChild(copyPopupElement);
   uploadFormOverlayElement.classList.add('hidden');
   popupFragment.querySelector('.error__button').addEventListener('click', (evt) => {
     evt.preventDefault();
@@ -24,10 +24,10 @@ const showError =() => {
 };
 
 const showSucces = () => {
-  const succesPopup = document.querySelector('#success');
-  const copyPopup = succesPopup.content.cloneNode(true);
+  const successPopupElement = document.querySelector('#success');
+  const copyPopupElement = successPopupElement.content.cloneNode(true);
   const popupFragment = document.createDocumentFragment();
-  popupFragment.appendChild(copyPopup);
+  popupFragment.appendChild(copyPopupElement);
   uploadFormOverlayElement.classList.add('hidden');
   popupFragment.querySelector('.success__button').addEventListener('click', (evt) => {
     evt.preventDefault();

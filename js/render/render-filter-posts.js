@@ -4,11 +4,11 @@ import {updateComments} from './update-comments.js';
 
 const MAX_COUNT_RANDOM_ITEM = 10;
 
-const minPicturesFilter = document.querySelector('.img-filters');
+const minPicturesFilterElement = document.querySelector('.img-filters');
 
 //показываем кнопки для фильтрации
 const showFilters = () => {
-  minPicturesFilter.classList.remove('img-filters--inactive');
+  minPicturesFilterElement.classList.remove('img-filters--inactive');
 };
 
 //создаем массив случайных постов
@@ -28,10 +28,10 @@ const sortByPopular = (array) => array.slice().sort(comparePosts);
 
 //функция переключени и отрисовки постов
 const sortMinPictures = (array) => {
-  minPicturesFilter.addEventListener('click', (evt) => {
+  minPicturesFilterElement.addEventListener('click', (evt) => {
     if (evt.target.classList.contains('img-filters__button') && !evt.target.classList.contains('img-filters__button--active')) {
-      const activeBtn = document.querySelector('.img-filters__button--active');
-      activeBtn.classList.remove('img-filters__button--active');
+      const activeBtnElement = document.querySelector('.img-filters__button--active');
+      activeBtnElement.classList.remove('img-filters__button--active');
 
       evt.target.classList.add('img-filters__button--active');
       const filterName = evt.target.id;

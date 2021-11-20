@@ -1,5 +1,5 @@
 const renderPicture = (renderGetPosts) =>  {
-  const picturesList = document.querySelector('.pictures');
+  const picturesListElement = document.querySelector('.pictures');
   const pictureTemplate = document.querySelector('#picture');
   const pictureFragment = document.createDocumentFragment();
 
@@ -12,7 +12,7 @@ const renderPicture = (renderGetPosts) =>  {
     pictureFragment.appendChild(photoElement);
 
   });
-  picturesList.appendChild(pictureFragment);
+  picturesListElement.appendChild(pictureFragment);
 };
 
 export {renderPicture};
