@@ -12,16 +12,16 @@ const uploadFormElement = document.querySelector('#upload-select-image');
 const uploadCancelBtnElement = document.querySelector('#upload-cancel');
 const uploadImageOverlayElement = document.querySelector('.img-upload__overlay');
 const templateHashtag = /^#[A-Za-zА-Яа-яЁё0-9]{1,19}$/;
-const onHashTagInputElement = document.querySelector('.text__hashtags');
+const hashTagInputElement = document.querySelector('.text__hashtags');
 const inputDescriptionElement = document.querySelector('.text__description');
 const photoPreviewElement = document.querySelector('.img-upload__preview img');
 
-const onFileUploadElement = document.querySelector('#upload-file');
-const effectListElement = document.querySelectorAll('.effects__preview');
+const fileUploadElement = document.querySelector('#upload-file');
+const effectListElements = document.querySelectorAll('.effects__preview');
 const sliderLineElement = document.querySelector('.effect-level');
 
 const onEscapePress = (evt) => {
-  if (evt.code === 'Escape' && !uploadImageOverlayElement.classList.contains('hidden') && onHashTagInputElement !==document.activeElement && inputDescriptionElement !== document.activeElement) {
+  if (evt.code === 'Escape' && !uploadImageOverlayElement.classList.contains('hidden') && hashTagInputElement !==document.activeElement && inputDescriptionElement !== document.activeElement) {
     uploadImageOverlayElement.classList.add('hidden');
     closeForm();
   }
@@ -37,17 +37,19 @@ function closeForm() {
 }
 
 
-function onUploadCancelBtnClick() {closeForm();}
+function onUploadCancelBtnClick() {
+  closeForm();
+}
 
 const onFormLoadImage = () => {
   uploadImageOverlayElement.classList.remove('hidden');
   body.classList.add('modal-open');
-  const file = onFileUploadElement.files[0];
+  const file = fileUploadElement.files[0];
   const reader = new FileReader();
   reader.addEventListener('load', () => {
     photoPreviewElement.src = reader.result;
 
-    [].forEach.call(effectListElement, (effectPreview) => {
+    [].forEach.call(effectListElements, (effectPreview) => {
       effectPreview.style.backgroundImage = `url('${reader.result}')`;
     });
   });
@@ -88,47 +90,47 @@ const checkDuplicates = (arrItem) => {
   return set.size === arrItem.length;
 };
 
-onHashTagInputElement.addEventListener('input', () => {
-  const valueLength = onHashTagInputElement.value.length;
+hashTagInputElement.addEventListener('input', () => {
+  const valueLength = hashTagInputElement.value.length;
 
   switch (true) {
-    case onHashTagInputElement.value[0] !== '#': {
-      onHashTagInputElement.setCustomValidity('ХэшТег должен начинаться с #');
+    case hashTagInputElement.value[0] !== '#': {
+      hashTagInputElement.setCustomValidity('ХэшТег должен начинаться с #');
       break;
     }
-    case templateHashtag.test(onHashTagInputElement.value) && valueLength < MIN_HASHTAG_LENGTH: {
-      onHashTagInputElement.setCustomValidity(`Еще ${ MIN_HASHTAG_LENGTH - valueLength} символа`);
+    case templateHashtag.test(hashTagInputElement.value) && valueLength < MIN_HASHTAG_LENGTH: {
+      hashTagInputElement.setCustomValidity(`Еще ${ MIN_HASHTAG_LENGTH - valueLength} символа`);
       break;
     }
-    case (templateHashtag.test(onHashTagInputElement.value) && valueLength > MAX_HASHTAG_LENGTH): {
-      onHashTagInputElement.setCustomValidity(`Набрали на ${ valueLength - MAX_HASHTAG_LENGTH } лишних символов`);
+    case (templateHashtag.test(hashTagInputElement.value) && valueLength > MAX_HASHTAG_LENGTH): {
+      hashTagInputElement.setCustomValidity(`Набрали на ${ valueLength - MAX_HASHTAG_LENGTH } лишних символов`);
       break;
     }
-    case !checkDuplicates(valueToArray(onHashTagInputElement)) === true: {
-      onHashTagInputElement.setCustomValidity('Есть повторяющие хэштеги, так нельзя');
+    case !checkDuplicates(valueToArray(hashTagInputElement)) === true: {
+      hashTagInputElement.setCustomValidity('Есть повторяющие хэштеги, так нельзя');
       break;
     }
-    case onHashTagInputElement.value[onHashTagInputElement.value.length-1] === ' ' && valueToArray(onHashTagInputElement).length >= MAX_HASHTAG_COUNT:{
-      onHashTagInputElement.value = onHashTagInputElement.value.trim();
+    case hashTagInputElement.value[hashTagInputElement.value.length-1] === ' ' && valueToArray(hashTagInputElement).length >= MAX_HASHTAG_COUNT:{
+      hashTagInputElement.value = hashTagInputElement.value.trim();
       break;
     }
-    case !checkHashtagCounts(onHashTagInputElement) === true && valueToArray(onHashTagInputElement).length >= MIN_HASHTAG_LENGTH:{
-      onHashTagInputElement.setCustomValidity('У вас много хэштегов, максимум 5');
+    case !checkHashtagCounts(hashTagInputElement) === true && valueToArray(hashTagInputElement).length >= MIN_HASHTAG_LENGTH:{
+      hashTagInputElement.setCustomValidity('У вас много хэштегов, максимум 5');
       break;
     }
-    case !checkHashtagEvery(onHashTagInputElement) === true:{
-      onHashTagInputElement.setCustomValidity('У вас неправильно набран хэштег');
+    case !checkHashtagEvery(hashTagInputElement) === true:{
+      hashTagInputElement.setCustomValidity('У вас неправильно набран хэштег');
       break;
     }
-    default: onHashTagInputElement.setCustomValidity('');{
-      onHashTagInputElement.setCustomValidity('');
+    default: hashTagInputElement.setCustomValidity('');{
+      hashTagInputElement.setCustomValidity('');
     }
   }
-  onHashTagInputElement.reportValidity();
+  hashTagInputElement.reportValidity();
 });
 
 
-onFileUploadElement.addEventListener('click', () => {
+fileUploadElement.addEventListener('click', () => {
   resizeInputElement.value = '100%';
   previewImgElement.style.transform = 'scale(1)';
   previewImgElement.style.filter='';
