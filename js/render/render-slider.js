@@ -40,7 +40,7 @@ const createSlide = (element) => {
         }
         return value.toFixed(1);
       },
-      from: (value) =>  parseFloat(value),
+      from: (value) => parseFloat(value),
     },
   });
 };
